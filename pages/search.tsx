@@ -61,7 +61,9 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
   ctx
 ) => {
   const res = await axios(
-    encodeURI(`http://localhost:3001/api/v1/trending/search?q=${ctx.query.q}`)
+    encodeURI(
+      `https://safe-taiga-98795.herokuapp.com/api/v1/trending/search?q=${ctx.query.q}`
+    )
   );
   const data: New_Tweet[] = await res.data;
 
