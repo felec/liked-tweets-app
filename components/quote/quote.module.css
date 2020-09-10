@@ -1,0 +1,102 @@
+.quote {
+  display: flex;
+  flex-direction: column;
+  width: 37rem;
+  border-radius: 1rem;
+  background-color: #000;
+  border: 1px solid #38444d;
+  overflow: hidden;
+}
+
+.quoteNoPhoto {
+  display: flex;
+  flex-direction: column;
+  width: 37rem;
+  border-radius: 1rem;
+  background-color: #000;
+  border: 1px solid #38444d;
+  border-bottom-style: none;
+  overflow: hidden;
+}
+
+.quotePhoto {
+  display: flex;
+  flex-direction: column;
+  max-height: 37rem;
+  width: 37rem;
+  border-radius: 1rem;
+  background-color: #000;
+  border: 1px solid #38444d;
+  overflow: hidden;
+}
+
+.quoteHeader {
+  width: 100%;
+  padding: 1rem;
+  background-color: #15202b;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #38444d;
+  z-index: 10;
+}
+
+.quoteInfo {
+  height: 24px;
+  display: flex;
+  margin: 0.5rem 0;
+  overflow: hidden;
+}
+
+.quoteAvatar {
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.quoteName {
+  display: flex;
+  font-size: 15px;
+  font-weight: bold;
+  color: #fff;
+  margin: 0;
+  margin-right: 0.5rem;
+}
+
+.verified {
+  align-self: center;
+  height: 15px;
+  width: 15px;
+  margin-left: 0.5rem;
+}
+
+.quoteScreenName {
+  font-size: 15px;
+  font-weight: 500;
+  color: #82929f;
+  margin: 0;
+  margin-right: 0.5rem;
+}
+
+.quoteDate {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0;
+  color: #82929f;
+}
+
+.quoteText {
+  font-size: 15px;
+  margin: 0;
+  color: #fff;
+}
+
+.quoteMedia {
+  display: flex;
+  max-height: 20rem;
+  width: 100%;
+  background-color: #000;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}

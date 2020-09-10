@@ -1,0 +1,61 @@
+.photo {
+  height: auto;
+  width: 100%;
+  object-fit: cover;
+  background-repeat: no-repeat;
+}
+
+.photos {
+  display: flex;
+}
+
+.flexPhoto {
+  height: 20rem;
+  width: 20rem;
+  object-fit: cover;
+  background-repeat: no-repeat;
+}
+
+.twoPhoto {
+  display: flex;
+}
+
+.threePhoto {
+  display: flex;
+  flex-direction: column;
+}
+
+.flexThree {
+  display: flex;
+  flex-direction: column;
+}
+
+.flexThreePhoto {
+  display: flex;
+  object-fit: cover;
+  width: 50%;
+}
+
+.fourPhoto {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.noSupport {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 100%;
+  background-color: #15202b;
+}
+
+.modal {
+  height: 100vh;
+  width: 100vw;
+  background-color: #000;
+  opacity: 75%;
+  z-index: 100;
+}

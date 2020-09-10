@@ -1,0 +1,24 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #15202b;
+  font-size: 10px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Ubuntu, 'Helvetica Neue', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: #2795e0;
+  text-decoration: none;
+}
+
+/* #f5ad35
+#e2495f
+#7c59c4
+#ea5b29
+#6cc165 */
