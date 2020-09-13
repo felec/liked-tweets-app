@@ -63,14 +63,12 @@
 }
 
 .loadMore {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: 'center';
   height: 3rem;
   width: 30rem;
-  margin: 0 auto;
-  padding: 1rem;
+  padding-top: 0.5rem;
   background-color: #15202b;
   color: #fff;
   font-size: 15px;
@@ -82,16 +80,13 @@
 }
 
 .loadMore:hover {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: 'center';
   height: 3rem;
   width: 30rem;
-  margin: 0 auto;
-  padding: 1rem;
-  background-color: #15202b;
-  color: #2ba1f2;
+  padding-top: 0.5rem;
+  color: #71c9f8;
   font-size: 15px;
   font-weight: bold;
   cursor: pointer;

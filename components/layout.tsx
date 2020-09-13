@@ -1,9 +1,10 @@
 import { useState, ChangeEvent } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-
-import styles from './layout.module.css';
 import Link from 'next/link';
+
+import Modal from './modal/modal';
+import styles from './layout.module.css';
 
 export const siteTitle = 'Liked Tweets';
 
@@ -21,10 +22,10 @@ export default function Layout({ children }) {
   };
 
   return (
-    <div>
+    <div style={{ position: 'relative' }}>
       <Head>
         <link rel='icon' href='/favicon.ico' />
-        <meta name='description' content='The Best tweets from twitter' />
+        <meta name='description' content='The most liked tweets on Twitter' />
         <meta
           property='og:image'
           content={`https://og-image.now.sh/${encodeURI(
@@ -51,9 +52,7 @@ export default function Layout({ children }) {
             />
           </form>
         </div>
-        <div className={styles.rightHeader}>
-          <img className={styles.user} src='../images/user.png' alt='' />
-        </div>
+        <Modal />
       </div>
 
       <main>{children}</main>

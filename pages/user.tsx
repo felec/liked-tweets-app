@@ -13,7 +13,7 @@ interface HomeProps {
   data: New_Tweet[];
 }
 
-export default function Home({ data }: HomeProps) {
+export default function User(props: HomeProps) {
   return (
     <Layout>
       <Head>
@@ -22,7 +22,7 @@ export default function Home({ data }: HomeProps) {
 
       <div className={styles.navBar}>
         <Link href='/sports'>
-          <a className={styles.selected}>Sports</a>
+          <a className={styles.button}>Sports</a>
         </Link>
 
         <Link href='/'>
@@ -32,43 +32,50 @@ export default function Home({ data }: HomeProps) {
         <Link href='/news'>
           <a className={styles.button}>News</a>
         </Link>
+
+        <Link href='/feed'>
+          <a className={styles.selected}>Feed</a>
+        </Link>
       </div>
 
       <section className={styles.home}>
-        <h2>Sports</h2>
+        <h2>Coming Soon!</h2>
         <ul
           style={{
+            listStyle: 'none',
+            margin: '0',
+            padding: '0',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
           }}
         >
-          {data.map((t) => {
+          {/* {props.data.map((t) => {
             return (
               <div key={t.id_str} style={{ marginBottom: '5rem' }}>
                 <Card tweet={t} />
               </div>
             );
-          })}
-          {Paginate('sports')}
+          })} */}
         </ul>
       </section>
     </Layout>
   );
 }
 
-export const getServerSideProps: GetServerSideProps<HomeProps> = async (
-  ctx
-) => {
-  const res = await axios(
-    'https://safe-taiga-98795.herokuapp.com/api/v1/sports?per_page=25&page=0'
-  );
-  const data: New_Tweet[] = await res.data;
+// export const getServerSideProps: GetServerSideProps<HomeProps> = async (
+//   ctx
+// ) => {
+//   const res = await axios('https://safe-taiga-98795.herokuapp.com/api/v1/user');
+//   // const res = await axios(
+//   //   'http://localhost:3001/api/v1/user
+//   // );
+//   const data: New_Tweet[] = await res.data;
 
-  return {
-    props: {
-      data,
-    },
-  };
-};
+//   return {
+//     props: {
+//       data,
+//     },
+//   };
+// };

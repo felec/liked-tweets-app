@@ -11,23 +11,6 @@
   width: 100%;
 }
 
-.rightHeader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-self: center;
-  min-width: 48px;
-  min-height: 48px;
-  border-radius: 50%;
-  cursor: pointer;
-  overflow: hidden;
-}
-
-.user {
-  height: 48px;
-  width: 48px;
-}
-
 .h1 {
   align-self: center;
   text-align: center;

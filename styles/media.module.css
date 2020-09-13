@@ -5,6 +5,22 @@
   background-repeat: no-repeat;
 }
 
+.full {
+  content: '';
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  transform: scale(0.8);
+  background-color: #000;
+  border-radius: 0.5rem;
+  object-fit: contain;
+  z-index: 300;
+}
+
 .photos {
   display: flex;
 }
@@ -17,16 +33,18 @@
 }
 
 .twoPhoto {
+  position: relative;
   display: flex;
 }
 
 .threePhoto {
   display: flex;
-  flex-direction: column;
 }
 
 .flexThree {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 }
 

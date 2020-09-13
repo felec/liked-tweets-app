@@ -9,9 +9,19 @@ interface ContentProps {
 }
 
 export default function Quote({ tweet }: ContentProps) {
-  const created = Date.parse(tweet.q_created_at);
-  const date = new Date(created);
   let q_text = tweet.q_full_text;
+
+  const raw = tweet.q_created_at.split('-');
+  const fixDate = raw[2].slice(0, 2);
+  const restDate = raw[2].slice(3, -1);
+  const finalStamp = `${raw[0]}-${raw[1]}-${fixDate}T${restDate}`;
+
+  const created = Date.parse(finalStamp);
+  const date = new Date(created);
+  const local = date.toLocaleDateString();
+  const localList = local.split('/');
+  const year = localList[2].slice(0, 2);
+  const localDate = `${localList[0]}/${localList[1]}/${year}`;
 
   if (q_text.includes('http')) {
     const qtList = q_text.split(' ');
@@ -21,11 +31,6 @@ export default function Quote({ tweet }: ContentProps) {
       })
       .join(' ');
   }
-
-  const local = date.toLocaleDateString();
-  const localList = local.split('/');
-  const year = localList[2].slice(0, 2);
-  const localDate = `${localList[0]}/${localList[1]}/${year}`;
 
   const quoteClassName = () => {
     if (tweet.media.length) {
@@ -42,7 +47,7 @@ export default function Quote({ tweet }: ContentProps) {
         <div className={styles.quoteInfo}>
           <img
             src={cdn(tweet.q_profile_image_url_https)}
-            alt='pic'
+            alt='avatar'
             className={styles.quoteAvatar}
           />
           {truncateNames(tweet)}

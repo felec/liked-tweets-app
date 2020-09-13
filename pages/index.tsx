@@ -29,8 +29,8 @@ export default function Home(props: HomeProps) {
           <a className={styles.selected}>Trending</a>
         </Link>
 
-        <Link href='/politics'>
-          <a className={styles.button}>Politics</a>
+        <Link href='/news'>
+          <a className={styles.button}>News</a>
         </Link>
       </div>
 
@@ -38,6 +38,9 @@ export default function Home(props: HomeProps) {
         <h2>Trending</h2>
         <ul
           style={{
+            listStyle: 'none',
+            margin: '0',
+            padding: '0',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
@@ -51,8 +54,8 @@ export default function Home(props: HomeProps) {
               </div>
             );
           })}
+          {Paginate('trending')}
         </ul>
-        {Paginate('trending')}
       </section>
     </Layout>
   );
@@ -64,6 +67,9 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
   const res = await axios(
     'https://safe-taiga-98795.herokuapp.com/api/v1/trending?per_page=25&page=0'
   );
+  // const res = await axios(
+  //   'http://localhost:3001/api/v1/trending?per_page=25&page=0'
+  // );
   const data: New_Tweet[] = await res.data;
 
   return {

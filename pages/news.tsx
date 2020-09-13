@@ -6,6 +6,7 @@ import axios from 'axios';
 import Layout, { siteTitle } from '../components/layout';
 import Card from '../components/card';
 import { New_Tweet } from '../types/type';
+import Paginate from '../hooks/paginate';
 import styles from '../styles/home.module.css';
 
 interface HomeProps {
@@ -28,13 +29,13 @@ export default function Home({ data }: HomeProps) {
           <a className={styles.button}>Trending</a>
         </Link>
 
-        <Link href='/politics'>
-          <a className={styles.selected}>Politics</a>
+        <Link href='/news'>
+          <a className={styles.selected}>News</a>
         </Link>
       </div>
 
       <section className={styles.home}>
-        <h2>Politics</h2>
+        <h2>News</h2>
         <ul
           style={{
             display: 'flex',
@@ -43,29 +44,31 @@ export default function Home({ data }: HomeProps) {
             alignItems: 'center',
           }}
         >
-          <h1>Coming Soon!</h1>
-          {/* {data.map((t) => {
+          {data.map((t) => {
             return (
               <div key={t.id_str} style={{ marginBottom: '5rem' }}>
                 <Card tweet={t} />
               </div>
             );
-          })} */}
+          })}
+          {Paginate('news')}
         </ul>
       </section>
     </Layout>
   );
 }
 
-// export const getServerSideProps: GetServerSideProps<HomeProps> = async (
-//   ctx
-// ) => {
-//   const res = await axios('http://localhost:3001/api/v1/politics');
-//   const data: New_Tweet[] = await res.data;
+export const getServerSideProps: GetServerSideProps<HomeProps> = async (
+  ctx
+) => {
+  const res = await axios(
+    'https://safe-taiga-98795.herokuapp.com/api/v1/news?per_page=25&page=0'
+  );
+  const data: New_Tweet[] = await res.data;
 
-//   return {
-//     props: {
-//       data,
-//     },
-//   };
-// };
+  return {
+    props: {
+      data,
+    },
+  };
+};

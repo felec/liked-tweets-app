@@ -28,8 +28,8 @@ export default function Tweets(props: HomeProps) {
           <a className={styles.button}>Trending</a>
         </Link>
 
-        <Link href='/politics'>
-          <a className={styles.button}>Politics</a>
+        <Link href='/news'>
+          <a className={styles.button}>News</a>
         </Link>
       </div>
 

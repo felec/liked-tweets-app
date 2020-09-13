@@ -10,11 +10,18 @@ const PAGE_SIZE = 25;
 export default function Paginate(category: string) {
   const { data, error, mutate, size, setSize, isValidating } = useSWRInfinite(
     (index) =>
-      `http://localhost:3001/api/v1/${category}?per_page=${PAGE_SIZE}&page=${
+      `https://safe-taiga-98795.herokuapp.com/api/v1/${category}?per_page=${PAGE_SIZE}&page=${
         index + 1
       }`,
     fetcher
   );
+  // const { data, error, mutate, size, setSize, isValidating } = useSWRInfinite(
+  //   (index) =>
+  //     `http://localhost:3001/api/v1/${category}?per_page=${PAGE_SIZE}&page=${
+  //       index + 1
+  //     }`,
+  //   fetcher
+  // );
 
   const tweets = data ? [].concat(...data) : [];
   const isLoadingInitialData = !data && !error;
@@ -30,25 +37,16 @@ export default function Paginate(category: string) {
       style={{
         display: 'flex',
         flexDirection: 'column',
+        alignItems: 'center',
         justifyContent: 'center',
         marginBottom: '5rem',
       }}
     >
       {tweets.map((t) => {
         return (
-          <ul
-            key={Math.random() + 10}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <div key={t.id_str} style={{ marginBottom: '5rem' }}>
-              <Card tweet={t} />
-            </div>
-          </ul>
+          <div key={t.id_str} style={{ marginBottom: '5rem' }}>
+            <Card tweet={t} />
+          </div>
         );
       })}
       <button
