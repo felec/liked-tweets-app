@@ -10,7 +10,7 @@ const PAGE_SIZE = 25;
 export default function Paginate(category: string) {
   const { data, error, mutate, size, setSize, isValidating } = useSWRInfinite(
     (index) =>
-      `https://safe-taiga-98795.herokuapp.com/api/v1/${category}?per_page=${PAGE_SIZE}&page=${
+      `https://dry-chamber-80914.herokuapp.com/api/v1/${category}?per_page=${PAGE_SIZE}&page=${
         index + 1
       }`,
     fetcher
