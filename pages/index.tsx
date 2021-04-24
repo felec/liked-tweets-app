@@ -65,7 +65,7 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
   ctx
 ) => {
   const res = await axios(
-    'https://safe-taiga-98795.herokuapp.com/api/v1/trending?per_page=25&page=0'
+    'https://dry-chamber-80914.herokuapp.com/api/v1/trending?per_page=25&page=0'
   );
   // const res = await axios(
   //   'http://localhost:3001/api/v1/trending?per_page=25&page=0'
