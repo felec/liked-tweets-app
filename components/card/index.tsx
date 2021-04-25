@@ -36,7 +36,7 @@ export default function Card({ tweet }: { tweet: New_Tweet }) {
 
   const local = date.toLocaleDateString();
   const localList = local.split('/');
-  const year = localList[2].slice(0, 2);
+  const year = localList[2].slice(2, localList[2].length);
   const localDate = `${localList[0]}/${localList[1]}/${year}`;
 
   return (
