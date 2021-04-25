@@ -62,7 +62,7 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
   ctx
 ) => {
   const res = await axios(
-    'https://dry-chamber-80914.herokuapp.com/api/v1/sports?per_page=25&page=0'
+    'https://peaceful-reef-54258.herokuapp.com/api/v1/sports?per_page=25&page=0'
   );
   const data: New_Tweet[] = await res.data;
 
