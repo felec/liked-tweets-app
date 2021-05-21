@@ -33,7 +33,7 @@
 .quoteHeader {
   width: 100%;
   padding: 1rem;
-  background-color: #15202b;
+  /* background-color: #15202b; */
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: #38444d;
@@ -60,7 +60,7 @@
 .quoteName {
   display: flex;
   align-items: center;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: bold;
   color: #fff;
   margin: 0;
@@ -68,15 +68,15 @@
 }
 
 .verified {
-  height: 15px;
-  width: 15px;
+  height: 13px;
+  width: 13px;
   margin-left: 0.5rem;
 }
 
 .quoteScreenName {
   display: flex;
   align-items: center;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 400;
   margin: 0;
   margin-right: 0.5rem;
@@ -86,13 +86,14 @@
 .quoteDate {
   display: flex;
   align-items: center;
-  font-size: 15px;
+  font-size: 12px;
   margin: 0;
   color: #82929f;
 }
 
 .quoteText {
-  font-size: 15px;
+  font-size: 14px;
+  overflow-wrap: break-word;
   margin: 0;
   color: #fff;
 }

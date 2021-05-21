@@ -32,6 +32,12 @@
   background-repeat: no-repeat;
 }
 
+.flexThreeSinglePhoto {
+  height: 20rem;
+  object-fit: cover;
+  background-repeat: no-repeat;
+}
+
 .twoPhoto {
   position: relative;
   display: flex;
@@ -51,7 +57,7 @@
 .flexThreePhoto {
   display: flex;
   object-fit: cover;
-  width: 50%;
+  width: 12.5vw;
 }
 
 .fourPhoto {

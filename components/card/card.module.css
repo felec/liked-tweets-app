@@ -2,10 +2,9 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 40rem;
+  width: 35rem;
   padding: 1rem 1.5rem;
   border-radius: 1rem;
-  background-color: #15202b;
   border: 1px solid #38444d;
 }
 
@@ -27,6 +26,11 @@
   overflow: hidden;
 }
 
+.cardHeader {
+  display: flex;
+  height: 48px;
+}
+
 .cardHeader:hover + .profilePeek {
   content: '';
   position: absolute;
@@ -42,11 +46,6 @@
   height: 25rem;
   width: 25rem;
   z-index: 200;
-}
-
-.cardHeader {
-  display: flex;
-  height: 48px;
 }
 
 .cardHeaderInfo {
@@ -72,8 +71,8 @@
 
 .verified {
   align-self: center;
-  height: 15px;
-  width: 15px;
+  height: 13px;
+  width: 13px;
   margin-left: 0.5rem;
 }
 
@@ -86,6 +85,7 @@
 
 .text {
   font-size: 23px;
+  overflow-wrap: break-word;
 }
 
 .content {
@@ -112,7 +112,7 @@
   flex-direction: column;
   height: 25%;
   width: 100%;
-  font-size: 15px;
+  font-size: 13px;
   color: #82929f;
 }
 

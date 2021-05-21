@@ -1,0 +1,62 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.25);
+  z-index: 100;
+}
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 25rem;
+  width: 25rem;
+  border-radius: 0.5rem;
+  z-index: 101;
+  background: linear-gradient(
+    120deg,
+    rgba(11, 78, 209, 1) 25%,
+    rgba(15, 111, 226, 1) 50%,
+    rgba(2, 171, 228, 1) 75%,
+    rgba(0, 212, 255, 1) 100%
+  );
+}
+
+.user {
+  height: 48px;
+  width: 48px;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.login {
+  background-color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  color: #2ba1f2;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.login:hover {
+  background-color: rgb(231, 231, 231);
+  cursor: pointer;
+}
+
+.icon {
+  height: 4rem;
+  width: 4rem;
+  fill: #fff;
+  margin-bottom: 1rem;
+}

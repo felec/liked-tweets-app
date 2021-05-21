@@ -1,4 +1,4 @@
-export interface New_Tweet {
+export type NewTweet = {
   category: string;
   created_at: string;
   default_profile: boolean;
@@ -9,7 +9,7 @@ export interface New_Tweet {
   friends_count: number;
   id_str: string;
   is_quote_status: boolean;
-  media: New_Media[];
+  media: NewMedia[];
   name: string;
   profile_image_url_https: string;
   q_created_at: string;
@@ -32,9 +32,40 @@ export interface New_Tweet {
   full_text: string;
   url: string;
   verified: boolean;
-}
+};
 
-export interface New_Media {
+export type TweetUser = {
+  name: string;
+  screen_name: string;
+  verified: boolean;
+  followers_count: number;
+  friends_count: number;
+  favorites_count: number;
+  profile_image_url_https: string;
+};
+
+export type LoginUser = {
+  id_str: string;
+  name: string;
+  screen_name: string;
+  location: string;
+  description: string;
+  url: string;
+  protected: false;
+  followers_count: number;
+  friends_count: number;
+  listed_count: number;
+  created_at: string;
+  favourites_count: number;
+  verified: false;
+  statuses_count: number;
+  profile_image_url_https: string;
+  default_profile: boolean;
+  default_profile_image: boolean;
+  follow_request_sent: boolean;
+};
+
+export type NewMedia = {
   aspect_ratio: number[];
   duration_millis: number;
   id_str: string;
@@ -42,4 +73,4 @@ export interface New_Media {
   thumb: string;
   type: string;
   url: string;
-}
+};

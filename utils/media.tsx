@@ -2,11 +2,24 @@ import { useState } from 'react';
 import ReactPlayer from 'react-player';
 
 import { cdn } from '../utils/cdn';
-import { New_Media } from '../types/type';
+import { NewMedia } from '../types/type';
 import styles from '../styles/media.module.css';
+import Modal from '../components/modal/modal';
 
-export default function Media(media: New_Media[]) {
-  const [gallery, setGallery] = useState(false);
+export default function Media(media: NewMedia[], isTwitter: boolean) {
+  const [isModal, setIsModal] = useState(false);
+  const [url, setUrl] = useState<string | null>(null);
+  const [size, setSize] = useState<number[] | null>(null);
+
+  const closeModal = () => {
+    setIsModal(false);
+  };
+
+  const openModal = (url: string, size: number[]) => {
+    setUrl(url);
+    setSize(size);
+    setIsModal(true);
+  };
 
   const renderMediaType = () => {
     if (media.length === 1) {
@@ -16,124 +29,112 @@ export default function Media(media: New_Media[]) {
             return (
               <ReactPlayer
                 key={m.id_str}
-                url={cdn(m.url)}
+                url={isTwitter ? m.url : cdn(m.url)}
                 loop={true}
                 controls={true}
               />
             );
           case 'photo':
-            return gallery ? (
-              <div onClick={() => setGallery(!gallery)} className={styles.full}>
-                {media.map((m) => {
-                  return <img src={cdn(m.url)} alt='' />;
-                })}
-              </div>
-            ) : (
+            return (
               <img
-                onClick={() => setGallery(!gallery)}
                 key={m.id_str}
+                onClick={() => openModal(m.url, m.size)}
                 className={styles.photo}
-                src={cdn(m.url)}
-                alt='pic'
+                src={isTwitter ? m.url : cdn(m.url)}
+                alt='tweet pic'
               />
             );
+
           default:
             break;
         }
       });
     } else if (media.length === 2) {
-      return gallery ? (
-        <div onClick={() => setGallery(!gallery)} className={styles.full}>
-          {media.map((m) => {
-            return <img src={cdn(m.url)} alt='' />;
-          })}
-        </div>
-      ) : (
-        <div onClick={() => setGallery(!gallery)} className={styles.twoPhoto}>
+      return (
+        <div className={styles.twoPhoto}>
           <img
             key={media[0].id_str}
+            onClick={() => openModal(media[0].url, media[0].size)}
             style={{ marginRight: '2px' }}
             className={styles.flexPhoto}
-            src={cdn(media[0].url)}
-            alt='pic'
+            src={isTwitter ? media[0].url : cdn(media[0].url)}
+            alt='pic1'
           />
+
           <img
             key={media[1].id_str}
+            onClick={() => openModal(media[1].url, media[1].size)}
+            style={{ marginRight: '2px' }}
             className={styles.flexPhoto}
-            src={cdn(media[1].url)}
-            alt='pic 2'
+            src={isTwitter ? media[1].url : cdn(media[1].url)}
+            alt='pic2'
           />
         </div>
       );
     } else if (media.length === 3) {
-      return gallery ? (
-        <div onClick={() => setGallery(!gallery)} className={styles.full}>
-          {media.map((m) => {
-            return <img src={cdn(m.url)} alt='' />;
-          })}
-        </div>
-      ) : (
-        <div onClick={() => setGallery(!gallery)} className={styles.threePhoto}>
+      return (
+        <div className={styles.threePhoto}>
           <img
             key={media[0].id_str}
+            onClick={() => openModal(media[0].url, media[0].size)}
             style={{ marginRight: '2px' }}
             className={styles.flexThreePhoto}
-            src={cdn(media[0].url)}
+            src={isTwitter ? media[0].url : cdn(media[0].url)}
             alt='pic 1'
           />
           <div className={styles.flexThree}>
             <img
               key={media[1].id_str}
+              onClick={() => openModal(media[1].url, media[1].size)}
               style={{ marginBottom: '2px' }}
-              className={styles.flexPhoto}
-              src={cdn(media[1].url)}
+              className={styles.flexThreeSinglePhoto}
+              src={isTwitter ? media[1].url : cdn(media[1].url)}
               alt='pic 2'
             />
             <img
               key={media[2].id_str}
-              className={styles.flexPhoto}
-              src={cdn(media[2].url)}
+              onClick={() => openModal(media[2].url, media[2].size)}
+              className={styles.flexThreeSinglePhoto}
+              src={isTwitter ? media[2].url : cdn(media[2].url)}
               alt='pic 3'
             />
           </div>
         </div>
       );
     } else if (media.length === 4) {
-      return gallery ? (
-        <div onClick={() => setGallery(!gallery)} className={styles.full}>
-          {media.map((m) => {
-            return <img src={cdn(m.url)} alt='' />;
-          })}
-        </div>
-      ) : (
-        <div onClick={() => setGallery(!gallery)} className={styles.fourPhoto}>
+      return (
+        <div className={styles.fourPhoto}>
           <div className={styles.photos}>
             <img
               key={media[0].id_str}
+              onClick={() => openModal(media[0].url, media[0].size)}
               style={{ marginBottom: '2px', marginRight: '2px' }}
               className={styles.flexPhoto}
-              src={cdn(media[0].url)}
+              src={isTwitter ? media[0].url : cdn(media[0].url)}
               alt='pic 1'
             />
             <img
               key={media[1].id_str}
+              onClick={() => openModal(media[1].url, media[1].size)}
               className={styles.flexPhoto}
-              src={cdn(media[1].url)}
+              src={isTwitter ? media[1].url : cdn(media[1].url)}
               alt='pic 2'
             />
           </div>
           <div className={styles.photos}>
             <img
               key={media[2].id_str}
+              onClick={() => openModal(media[2].url, media[2].size)}
               style={{ marginRight: '2px' }}
               className={styles.flexPhoto}
-              src={cdn(media[2].url)}
+              src={isTwitter ? media[2].url : cdn(media[2].url)}
               alt='pic 3'
             />
             <img
               key={media[3].id_str}
+              onClick={() => openModal(media[3].url, media[3].size)}
               className={styles.flexPhoto}
-              src={cdn(media[3].url)}
+              src={isTwitter ? media[3].url : cdn(media[3].url)}
               alt='pic 4'
             />
           </div>
@@ -142,5 +143,12 @@ export default function Media(media: New_Media[]) {
     }
   };
 
-  return <>{renderMediaType()}</>;
+  return (
+    <>
+      {renderMediaType()}{' '}
+      {isModal && (
+        <Modal url={url} size={size} cb={closeModal} isTwitter={isTwitter} />
+      )}
+    </>
+  );
 }

@@ -7,10 +7,10 @@ import styles from '../styles/home.module.css';
 const fetcher = (url) => axios.get(url).then((res) => res.data);
 const PAGE_SIZE = 25;
 
-export default function Paginate(category: string) {
+export default function Paginate(category: string, sortBy: string) {
   const { data, error, mutate, size, setSize, isValidating } = useSWRInfinite(
     (index) =>
-      `https://peaceful-reef-54258.herokuapp.com/api/v1/${category}?per_page=${PAGE_SIZE}&page=${
+      `https://peaceful-reef-54258.herokuapp.com/api/v1/${category}?sort_by=${sortBy}&per_page=${PAGE_SIZE}&page=${
         index + 1
       }`,
     fetcher
@@ -45,7 +45,7 @@ export default function Paginate(category: string) {
       {tweets.map((t) => {
         return (
           <div key={t.id_str} style={{ marginBottom: '5rem' }}>
-            <Card tweet={t} />
+            <Card tweet={t} isTwitter={false} />
           </div>
         );
       })}

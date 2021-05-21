@@ -2,11 +2,17 @@ import NumAbbr from 'number-abbreviate';
 
 import Quote from '../quote';
 import { cdn } from '../../utils/cdn';
-import { New_Tweet } from '../../types/type';
+import { NewTweet } from '../../types/type';
 import styles from './card.module.css';
 import Media from '../../utils/media';
 
-export default function Card({ tweet }: { tweet: New_Tweet }) {
+export default function Card({
+  tweet,
+  isTwitter,
+}: {
+  tweet: NewTweet;
+  isTwitter: boolean;
+}) {
   const numAbbr = new NumAbbr(['K', 'M', 'B', 'T']);
 
   const created = Date.parse(tweet.created_at);
@@ -21,6 +27,13 @@ export default function Card({ tweet }: { tweet: New_Tweet }) {
       })
       .join(' ');
   }
+
+  const truncateScrNme = (name: string) => {
+    if (name.length > 27) {
+      return `${name.slice(0, 28)}...`;
+    }
+    return name;
+  };
 
   const truncateDescr = (desc: string) => {
     if (desc.length > 85) {
@@ -50,7 +63,7 @@ export default function Card({ tweet }: { tweet: New_Tweet }) {
 
         <div className={styles.cardHeaderInfo}>
           <h2 className={styles.name}>
-            {tweet.name}{' '}
+            {truncateScrNme(tweet.name)}{' '}
             {tweet.verified && (
               <img
                 className={styles.verified}
@@ -78,7 +91,9 @@ export default function Card({ tweet }: { tweet: New_Tweet }) {
           )}
         </h2>{' '}
         <h3 className={styles.screenName}>@{tweet.screen_name}</h3>
-        <p>{truncateDescr(tweet.description)}</p>
+        <p style={{ marginBottom: '1rem' }}>
+          {truncateDescr(tweet.description)}
+        </p>
         <div style={{ display: 'flex' }}>
           <p style={{ marginRight: '2rem' }}>
             <span className={styles.cardFooterCount}>
@@ -105,7 +120,9 @@ export default function Card({ tweet }: { tweet: New_Tweet }) {
         {tweet.q_created_at ? (
           <Quote tweet={tweet} />
         ) : tweet.media.length ? (
-          <div className={styles.cardMedia}>{Media(tweet.media)}</div>
+          <div className={styles.cardMedia}>
+            {Media(tweet.media, isTwitter)}
+          </div>
         ) : (
           <div></div>
         )}

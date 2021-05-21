@@ -1,7 +1,7 @@
-import { New_Tweet } from '../types/type';
+import { NewTweet } from '../types/type';
 import styles from '../components/quote/quote.module.css';
 
-export const truncateNames = (tweet: New_Tweet) => {
+export const truncateNames = (tweet: NewTweet) => {
   const alpha = { W: 1, Q: 1, U: 1, M: 1, G: 1, H: 1 };
   let qName = tweet.q_name;
   let sName = tweet.q_screen_name;
@@ -13,8 +13,8 @@ export const truncateNames = (tweet: New_Tweet) => {
     }
   });
 
-  if (qName.length > 17) {
-    if (qName.length > 20) {
+  if (qName.length > 14) {
+    if (qName.length > 17) {
       for (let i = 12; i < qName.length; i++) {
         qName = qName.slice(0, -1);
       }

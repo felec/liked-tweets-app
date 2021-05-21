@@ -1,14 +1,16 @@
 import { cdn } from '../../utils/cdn';
-import { New_Tweet } from '../../types/type';
+import { NewTweet } from '../../types/type';
 import styles from './quote.module.css';
 import { truncateNames } from '../../utils/truncate-names';
 import Media from '../../utils/media';
+import { useTheme } from '../../contexts/ThemeContext';
 
 interface ContentProps {
-  tweet: New_Tweet;
+  tweet: NewTweet;
 }
 
 export default function Quote({ tweet }: ContentProps) {
+  const { theme, setTheme } = useTheme();
   let q_text = tweet.q_full_text;
 
   const raw = tweet.q_created_at.split('-');
@@ -41,9 +43,14 @@ export default function Quote({ tweet }: ContentProps) {
     return styles.quoteNoPhoto;
   };
 
+  const themeColor = theme === 0 ? '#15202b' : '#FFF';
+
   return (
     <div className={quoteClassName()}>
-      <div className={styles.quoteHeader}>
+      <div
+        className={styles.quoteHeader}
+        style={{ backgroundColor: themeColor }}
+      >
         <div className={styles.quoteInfo}>
           <img
             src={cdn(tweet.q_profile_image_url_https)}

@@ -1,41 +1,37 @@
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-import axios from 'axios';
+import React, { useEffect } from 'react';
 
+import ReactDOM from 'react-dom';
+import { cdn } from '../../utils/cdn';
 import styles from './modal.module.css';
 
-export default function Modal() {
-  const [modal, setModal] = useState(false);
-  const router = useRouter();
+const Modal = ({
+  url,
+  size,
+  cb,
+  isTwitter,
+}: {
+  url: string;
+  size: number[];
+  cb: Function;
+  isTwitter: boolean;
+}) => {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => (document.body.style.overflow = 'unset');
+  }, []);
 
-  const loginUser = () => {
-    // axios.get('https://safe-taiga-98795.herokuapp.com/login');
-    router.push('/user');
-  };
-
-  return modal ? (
-    <div onClick={() => setModal(false)} className={styles.backdrop}>
-      <div onClick={(e) => e.stopPropagation()} className={styles.modal}>
-        <img
-          className={styles.icon}
-          src='../images/twitter-brands.svg'
-          alt='logo'
-        />
-        <a
-          onClick={loginUser}
-          className={styles.login}
-          href='javascript:void(0)'
-        >
-          Login with Twitter
-        </a>
-      </div>
-    </div>
-  ) : (
-    <img
-      onClick={() => setModal(!modal)}
-      className={styles.user}
-      src='../images/user.png'
-      alt=''
-    />
+  return ReactDOM.createPortal(
+    <div onClick={() => cb()} className={styles.backdrop}>
+      <img
+        height={size[0] / 1.5}
+        width={size[1] / 1.5}
+        className={styles.src}
+        src={isTwitter ? url : cdn(url)}
+        alt='tweet pic'
+      />
+    </div>,
+    document.getElementById('modal-root')
   );
-}
+};
+
+export default Modal;

@@ -4,12 +4,12 @@ import Head from 'next/head';
 import axios from 'axios';
 
 import Layout, { siteTitle } from '../components/layout';
-import { New_Tweet } from '../types/type';
+import { NewTweet } from '../types/type';
 import styles from '../styles/home.module.css';
 import Card from '../components/card';
 
 interface HomeProps {
-  data: New_Tweet[];
+  data: NewTweet[];
 }
 
 export default function Tweets(props: HomeProps) {
@@ -34,7 +34,7 @@ export default function Tweets(props: HomeProps) {
       </div>
 
       <section className={styles.home}>
-        <h2>Results</h2>
+        <h2>Search Results</h2>
         <ul
           style={{
             display: 'flex',
@@ -47,7 +47,7 @@ export default function Tweets(props: HomeProps) {
             props.data.map((t) => {
               return (
                 <div key={t.id_str} style={{ marginBottom: '5rem' }}>
-                  <Card tweet={t} />
+                  <Card tweet={t} isTwitter={false} />
                 </div>
               );
             })}
@@ -65,7 +65,9 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
       `https://peaceful-reef-54258.herokuapp.com/api/v1/trending/search?q=${ctx.query.q}`
     )
   );
-  const data: New_Tweet[] = await res.data;
+  const data: NewTweet[] = await res.data;
+
+  console.log(data[0]);
 
   return {
     props: {

@@ -1,0 +1,90 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.25);
+  z-index: 100;
+}
+
+.drawer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 25rem;
+  padding: 2rem;
+  box-shadow: -1px 0 5px #82929f;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  z-index: 101;
+  color: #82929f;
+  background-color: #15202b;
+}
+
+.logout {
+  align-self: flex-end;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #0484d9;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.logout:hover {
+  background-color: #006eb8;
+  cursor: pointer;
+}
+
+.avatar {
+  height: 48px;
+  width: 48px;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.avatar:hover {
+  cursor: pointer;
+}
+
+.name {
+  display: flex;
+  font-size: 15px;
+  font-weight: bold;
+  color: #fff;
+  margin: 0;
+}
+
+.verified {
+  align-self: center;
+  height: 13px;
+  width: 13px;
+  margin-left: 0.5rem;
+}
+
+.screenName {
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0;
+  color: #82929f;
+}
+
+.text {
+  font-size: 23px;
+  overflow-wrap: break-word;
+}
+
+.cardFooterCount {
+  text-align: center;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
