@@ -118,7 +118,7 @@ export default function Card({
 
       <div className={styles.content}>
         {tweet.q_created_at ? (
-          <Quote tweet={tweet} />
+          <Quote tweet={tweet} isTwitter={isTwitter} />
         ) : tweet.media.length ? (
           <div className={styles.cardMedia}>
             {Media(tweet.media, isTwitter)}

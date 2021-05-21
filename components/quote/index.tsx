@@ -7,9 +7,10 @@ import { useTheme } from '../../contexts/ThemeContext';
 
 interface ContentProps {
   tweet: NewTweet;
+  isTwitter: boolean;
 }
 
-export default function Quote({ tweet }: ContentProps) {
+export default function Quote({ tweet, isTwitter }: ContentProps) {
   const { theme, setTheme } = useTheme();
   let q_text = tweet.q_full_text;
 
@@ -68,7 +69,7 @@ export default function Quote({ tweet }: ContentProps) {
       </div>
 
       <div key={tweet.id_str} className={styles.quoteMedia}>
-        {Media(tweet.media)}
+        {Media(tweet.media, isTwitter)}
       </div>
     </div>
   );
