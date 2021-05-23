@@ -58,7 +58,6 @@ export default function Drawer() {
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center',
                 marginLeft: '1rem',
               }}
             >

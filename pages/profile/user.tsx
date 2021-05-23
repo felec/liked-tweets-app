@@ -10,6 +10,7 @@ import styles from '../../styles/home.module.css';
 import { useUser } from '../../contexts/UserContext';
 import { useAuth } from '../../contexts/AuthContext';
 import Layout, { siteTitle } from '../../components/layout';
+import { useTheme } from '../../contexts/ThemeContext';
 
 function User() {
   const [isVerified, setIsVerified] = useState(false);
@@ -18,6 +19,8 @@ function User() {
   const { user, setUser } = useUser();
   const token = query['oauth_token'];
   const verifier = query['oauth_verifier'];
+  const { theme, setTheme } = useTheme();
+  const isDark = theme === 'dark';
   const cookie = Cookies.get('logged');
 
   useEffect(() => {
@@ -65,7 +68,7 @@ function User() {
         <title>{siteTitle}</title>
       </Head>
 
-      <div className={styles.navBar}>
+      <div className={isDark ? styles.navBar : styles.navBarLight}>
         <Link href='/sports'>
           <a className={styles.button}>Sports</a>
         </Link>

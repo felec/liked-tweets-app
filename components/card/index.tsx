@@ -106,7 +106,12 @@ export default function Card({
           {truncateDescr(tweet.description)}
         </p>
         <div style={{ display: 'flex' }}>
-          <p style={{ marginRight: '2rem' }}>
+          <p
+            style={{ marginRight: '2rem' }}
+            className={
+              isDark ? styles.profilePeekFooter : styles.profilePeekFooterLight
+            }
+          >
             <span
               className={
                 isDark ? styles.cardFooterCount : styles.cardFooterCountLight
@@ -117,7 +122,11 @@ export default function Card({
             Following{' '}
           </p>
 
-          <p>
+          <p
+            className={
+              isDark ? styles.profilePeekFooter : styles.profilePeekFooterLight
+            }
+          >
             <span
               className={
                 isDark ? styles.cardFooterCount : styles.cardFooterCountLight

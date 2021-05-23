@@ -54,6 +54,14 @@
   overflow: hidden;
 }
 
+.profilePeekFooter {
+  color: #fff;
+}
+
+.profilePeekFooterLight {
+  color: #000;
+}
+
 .cardHeader {
   display: flex;
   height: 48px;
