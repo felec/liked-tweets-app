@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import Head from 'next/head';
@@ -7,34 +8,42 @@ import Layout, { siteTitle } from '../components/layout';
 import { NewTweet } from '../types/type';
 import styles from '../styles/home.module.css';
 import Card from '../components/card';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface HomeProps {
   data: NewTweet[];
 }
 
-export default function Tweets(props: HomeProps) {
+function Search(props: HomeProps) {
+  const { theme, setTheme } = useTheme();
+  const isDark = theme === 'dark';
+
   return (
     <Layout>
       <Head>
         <title>{siteTitle}</title>
       </Head>
 
-      <div className={styles.navBar}>
+      <div className={isDark ? styles.navBar : styles.navBarLight}>
         <Link href='/sports'>
-          <a className={styles.button}>Sports</a>
+          <a className={isDark ? styles.button : styles.buttonLight}>Sports</a>
         </Link>
 
         <Link href='/'>
-          <a className={styles.button}>Trending</a>
+          <a className={isDark ? styles.button : styles.buttonLight}>
+            Trending
+          </a>
         </Link>
 
         <Link href='/news'>
-          <a className={styles.button}>News</a>
+          <a className={isDark ? styles.button : styles.buttonLight}>News</a>
         </Link>
       </div>
 
       <section className={styles.home}>
-        <h2>Search Results</h2>
+        <h2 className={isDark ? styles.seachTitle : styles.seachTitleLight}>
+          Search Results
+        </h2>
         <ul
           style={{
             display: 'flex',
@@ -57,6 +66,8 @@ export default function Tweets(props: HomeProps) {
   );
 }
 
+export default memo(Search);
+
 export const getServerSideProps: GetServerSideProps<HomeProps> = async (
   ctx
 ) => {
@@ -66,8 +77,6 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
     )
   );
   const data: NewTweet[] = await res.data;
-
-  console.log(data[0]);
 
   return {
     props: {

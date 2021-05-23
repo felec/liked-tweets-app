@@ -1,7 +1,7 @@
 import { NewTweet } from '../types/type';
 import styles from '../components/quote/quote.module.css';
 
-export const truncateNames = (tweet: NewTweet) => {
+export const truncateNames = (tweet: NewTweet, isDark: boolean) => {
   const alpha = { W: 1, Q: 1, U: 1, M: 1, G: 1, H: 1 };
   let qName = tweet.q_name;
   let sName = tweet.q_screen_name;
@@ -19,7 +19,7 @@ export const truncateNames = (tweet: NewTweet) => {
         qName = qName.slice(0, -1);
       }
       return (
-        <h2 className={styles.quoteName}>
+        <h2 className={isDark ? styles.quoteName : styles.quoteNameLight}>
           {qName}...{' '}
           {tweet.q_verified && (
             <img
@@ -31,7 +31,7 @@ export const truncateNames = (tweet: NewTweet) => {
       );
     }
     return (
-      <h2 className={styles.quoteName}>
+      <h2 className={isDark ? styles.quoteName : styles.quoteNameLight}>
         {qName}...{' '}
         {tweet.q_verified && (
           <img className={styles.verified} src='../images/verified-light.png' />
@@ -45,7 +45,7 @@ export const truncateNames = (tweet: NewTweet) => {
       }
       return (
         <>
-          <h2 className={styles.quoteName}>
+          <h2 className={isDark ? styles.quoteName : styles.quoteNameLight}>
             {qName}{' '}
             {tweet.q_verified && (
               <img
@@ -63,7 +63,7 @@ export const truncateNames = (tweet: NewTweet) => {
     }
     return (
       <>
-        <h2 className={styles.quoteName}>
+        <h2 className={isDark ? styles.quoteName : styles.quoteNameLight}>
           {qName}{' '}
           {tweet.q_verified && (
             <img
@@ -78,7 +78,7 @@ export const truncateNames = (tweet: NewTweet) => {
   } else {
     return (
       <>
-        <h2 className={styles.quoteName}>
+        <h2 className={isDark ? styles.quoteName : styles.quoteNameLight}>
           {qName}{' '}
           {tweet.q_verified && (
             <img

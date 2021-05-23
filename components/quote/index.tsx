@@ -12,6 +12,7 @@ interface ContentProps {
 
 export default function Quote({ tweet, isTwitter }: ContentProps) {
   const { theme, setTheme } = useTheme();
+  const isDark = theme === 'dark';
   let q_text = tweet.q_full_text;
 
   const raw = tweet.q_created_at.split('-');
@@ -38,13 +39,17 @@ export default function Quote({ tweet, isTwitter }: ContentProps) {
   const quoteClassName = () => {
     if (tweet.media.length) {
       return tweet.media[0]?.type === 'photo'
-        ? styles.quotePhoto
-        : styles.quote;
+        ? isDark
+          ? styles.quotePhoto
+          : styles.quotePhotoLight
+        : isDark
+        ? styles.quote
+        : styles.quoteLight;
     }
-    return styles.quoteNoPhoto;
+    return isDark ? styles.quoteNoPhoto : styles.quoteNoPhotoLight;
   };
 
-  const themeColor = theme === 0 ? '#15202b' : '#FFF';
+  const themeColor = isDark ? '#15202b' : '#FFF';
 
   return (
     <div className={quoteClassName()}>
@@ -58,12 +63,12 @@ export default function Quote({ tweet, isTwitter }: ContentProps) {
             alt='avatar'
             className={styles.quoteAvatar}
           />
-          {truncateNames(tweet)}
+          {truncateNames(tweet, isDark)}
           <p className={styles.quoteDate}>&middot; {localDate}</p>
         </div>
 
         <p
-          className={styles.quoteText}
+          className={isDark ? styles.quoteText : styles.quoteTextLight}
           dangerouslySetInnerHTML={{ __html: q_text }}
         ></p>
       </div>

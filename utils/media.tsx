@@ -4,7 +4,7 @@ import ReactPlayer from 'react-player';
 import { cdn } from '../utils/cdn';
 import { NewMedia } from '../types/type';
 import styles from '../styles/media.module.css';
-import Modal from '../components/modal/modal';
+import Modal from '../components/modal';
 
 export default function Media(media: NewMedia[], isTwitter: boolean) {
   const [isModal, setIsModal] = useState(false);
@@ -53,52 +53,54 @@ export default function Media(media: NewMedia[], isTwitter: boolean) {
       return (
         <div className={styles.twoPhoto}>
           <img
-            key={media[0].id_str}
-            onClick={() => openModal(media[0].url, media[0].size)}
-            style={{ marginRight: '2px' }}
-            className={styles.flexPhoto}
-            src={isTwitter ? media[0].url : cdn(media[0].url)}
-            alt='pic1'
-          />
-
-          <img
             key={media[1].id_str}
             onClick={() => openModal(media[1].url, media[1].size)}
             style={{ marginRight: '2px' }}
             className={styles.flexPhoto}
             src={isTwitter ? media[1].url : cdn(media[1].url)}
+            alt='pic1'
+          />
+
+          <img
+            key={media[0].id_str}
+            onClick={() => openModal(media[0].url, media[0].size)}
+            style={{ marginRight: '2px' }}
+            className={styles.flexPhoto}
+            src={isTwitter ? media[0].url : cdn(media[0].url)}
             alt='pic2'
           />
         </div>
       );
     } else if (media.length === 3) {
       return (
-        <div className={styles.threePhoto}>
+        <div className={styles.gridThree}>
           <img
             key={media[0].id_str}
             onClick={() => openModal(media[0].url, media[0].size)}
-            style={{ marginRight: '2px' }}
-            className={styles.flexThreePhoto}
             src={isTwitter ? media[0].url : cdn(media[0].url)}
+            className={styles.gridPhoto}
+            style={{
+              height: '100%',
+              width: '50%',
+              gridRow: '1 / span 2',
+            }}
             alt='pic 1'
           />
-          <div className={styles.flexThree}>
-            <img
-              key={media[1].id_str}
-              onClick={() => openModal(media[1].url, media[1].size)}
-              style={{ marginBottom: '2px' }}
-              className={styles.flexThreeSinglePhoto}
-              src={isTwitter ? media[1].url : cdn(media[1].url)}
-              alt='pic 2'
-            />
-            <img
-              key={media[2].id_str}
-              onClick={() => openModal(media[2].url, media[2].size)}
-              className={styles.flexThreeSinglePhoto}
-              src={isTwitter ? media[2].url : cdn(media[2].url)}
-              alt='pic 3'
-            />
-          </div>
+
+          <img
+            key={media[1].id_str}
+            onClick={() => openModal(media[1].url, media[1].size)}
+            src={isTwitter ? media[1].url : cdn(media[1].url)}
+            className={styles.gridPhoto}
+            alt='pic 2'
+          />
+          <img
+            key={media[2].id_str}
+            onClick={() => openModal(media[2].url, media[2].size)}
+            src={isTwitter ? media[2].url : cdn(media[2].url)}
+            className={styles.gridPhoto}
+            alt='pic 3'
+          />
         </div>
       );
     } else if (media.length === 4) {

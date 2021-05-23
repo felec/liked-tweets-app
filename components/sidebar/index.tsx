@@ -1,15 +1,21 @@
 import { cdn } from '../../utils/cdn';
 import { TweetUser } from '../../types/type';
 import styles from './sidebar.module.css';
+import { useTheme } from '../../contexts/ThemeContext';
 
 interface SidebarProps {
   data: TweetUser[];
 }
 
 export default function SideBar(props: SidebarProps) {
+  const { theme, setTheme } = useTheme();
+  const isDark = theme === 'dark';
+
   return (
     <div>
-      <h2 className={styles.sidebarTitle}>Top Tweeters</h2>
+      <h2 className={isDark ? styles.sidebarTitle : styles.sidebarTitleLight}>
+        Top Tweeters
+      </h2>
       <ul
         style={{
           listStyle: 'none',
@@ -31,10 +37,8 @@ export default function SideBar(props: SidebarProps) {
                 className={styles.avatar}
                 alt='profile picture'
               />
-              <h3
-                style={{ color: 'white', opacity: '.75', fontSize: '1.2rem' }}
-              >
-                {t.screen_name}
+              <h3 className={isDark ? styles.name : styles.nameLight}>
+                @{t.screen_name}
               </h3>
             </li>
           );

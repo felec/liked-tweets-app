@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -11,7 +11,7 @@ import { useUser } from '../../contexts/UserContext';
 import { useAuth } from '../../contexts/AuthContext';
 import Layout, { siteTitle } from '../../components/layout';
 
-export default function User() {
+function User() {
   const [isVerified, setIsVerified] = useState(false);
   const { query, isReady } = useRouter();
   const { isAuth, setIsAuth } = useAuth();
@@ -87,3 +87,5 @@ export default function User() {
     </Layout>
   );
 }
+
+export default memo(User);

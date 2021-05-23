@@ -18,15 +18,75 @@
   padding: 1rem;
   background-color: #15202b;
   border-radius: 0.5rem;
-  box-shadow: inset 0 0 10px #000000;
+  box-shadow: -2px 0 5px #000;
 }
 
-.dateSort {
+.navBarLight {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3rem;
+  width: 30rem;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: -2px 0 5px #82929f;
+}
+
+.categoryTitle {
+  color: #fff;
+  margin-left: 8rem;
+}
+
+.categoryTitleLight {
+  color: #000;
+  margin-left: 8rem;
+}
+
+.searchTitle {
+  color: #fff;
+}
+
+.searchTitleLight {
+  color: #000;
+}
+
+.trendSort {
   margin-left: 2rem;
   margin-right: 0.5rem;
 }
 
+.trendSort:hover {
+  fill: #2795e0;
+  cursor: pointer;
+}
+
+.trendSortLight {
+  margin-left: 2rem;
+  margin-right: 0.5rem;
+}
+
+.trendSortLight:hover {
+  fill: #2795e0;
+  cursor: pointer;
+}
+
+.dateSort {
+  margin-right: 0.5rem;
+}
+
 .dateSort:hover {
+  fill: #f5ad35;
+  cursor: pointer;
+}
+
+.dateSortLight {
+  margin-right: 0.5rem;
+}
+
+.dateSortLight:hover {
   fill: #f5ad35;
   cursor: pointer;
 }
@@ -36,8 +96,18 @@
 }
 
 .favSort:hover {
-  cursor: pointer;
   fill: #ff566f;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.favSortLight {
+  margin: 0 0.5rem;
+}
+
+.favSortLight:hover {
+  fill: #ff566f;
+  cursor: pointer;
   border-radius: 10px;
 }
 
@@ -46,6 +116,15 @@
 }
 
 .retweetSort:hover {
+  fill: #6cc165;
+  cursor: pointer;
+}
+
+.retweetSortLight {
+  margin: 0 0.5rem;
+}
+
+.retweetSortLight:hover {
   fill: #6cc165;
   cursor: pointer;
 }
@@ -74,12 +153,26 @@
 
 .button {
   display: flex;
+  color: #fff;
   align-items: center;
   height: 100%;
   padding: 1.2rem;
   border: none;
   border-radius: 0.5rem;
-  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.buttonLight {
+  display: flex;
+  color: #82929f;
+  align-items: center;
+  height: 100%;
+  padding: 1.2rem;
+  border: none;
+  border-radius: 0.5rem;
   font-size: 15px;
   font-weight: bold;
   cursor: pointer;
@@ -87,6 +180,20 @@
 }
 
 .button:hover {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 1.2rem;
+  border-radius: 0.5rem;
+  background-color: #2ba1f2;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.buttonLight:hover {
   display: flex;
   align-items: center;
   height: 100%;
@@ -113,6 +220,19 @@
   z-index: 10;
 }
 
+.selectedLight {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 1.2rem;
+  border-radius: 0.5rem;
+  color: #2ba1f2;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+}
+
 .loadMore {
   display: flex;
   justify-content: center;
@@ -127,7 +247,7 @@
   cursor: pointer;
   border: none;
   border-radius: 0.5rem;
-  box-shadow: inset 0 0 10px #000000;
+  box-shadow: inset 0 0 10px #000;
 }
 
 .loadMore:hover {
@@ -143,5 +263,5 @@
   cursor: pointer;
   border: none;
   border-radius: 0.5rem;
-  box-shadow: inset 0 0 10px #000000;
+  box-shadow: inset 0 0 10px #000;
 }

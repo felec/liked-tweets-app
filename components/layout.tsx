@@ -2,9 +2,10 @@ import { useState, ChangeEvent } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
+import { FaRegLightbulb } from 'react-icons/fa';
 
-import Popup from './popup/popup';
-import Drawer from './drawer/drawer';
+import Popup from './popup';
+import Drawer from './drawer';
 import styles from './layout.module.css';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
@@ -16,6 +17,7 @@ export default function Layout({ children }) {
   const { isAuth, setIsAuth } = useAuth();
   const { theme, setTheme } = useTheme();
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const isDark = theme === 'dark';
 
   const handleSearchQueryInput = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -26,12 +28,13 @@ export default function Layout({ children }) {
     router.push(`/search?q=${searchQuery}`);
   };
 
-  // const changeTheme = () => {
-  //   const currentTheme = theme === 0 ? 1 : 0;
-  //   setTheme(currentTheme);
-  // };
+  const changeTheme = () => {
+    const currentTheme = isDark ? 'light' : 'dark';
+    window.localStorage.setItem('theme', currentTheme);
+    setTheme(currentTheme);
+  };
 
-  const themeColor = theme === 0 ? '#15202b' : '#fff';
+  const themeColor = isDark ? '#15202b' : '#fff';
 
   return (
     <div style={{ position: 'relative', backgroundColor: themeColor }}>
@@ -50,12 +53,14 @@ export default function Layout({ children }) {
         <div className={styles.leftHeader}>
           <header className={styles.innerHeader}>
             <Link href='/'>
-              <h1 style={{ cursor: 'pointer' }}>LT</h1>
+              <h1 className={isDark ? styles.siteName : styles.siteNameLight}>
+                LT
+              </h1>
             </Link>
           </header>
           <form onSubmit={handleSearchSubmit} className={styles.container}>
             <input
-              className={styles.headerInput}
+              className={isDark ? styles.headerInput : styles.headerInputLight}
               type='text'
               placeholder='Search for a tweet or user...'
               maxLength={40}
@@ -65,12 +70,12 @@ export default function Layout({ children }) {
           </form>
         </div>
         <div style={{ display: 'flex' }}>
-          {/* <FaRegLightbulb
+          <FaRegLightbulb
             onClick={changeTheme}
             size='2.5rem'
             className={styles.themeMode}
-            color={theme === 0 ? '#82929f' : '#15202b'}
-          /> */}
+            color={isDark ? '#82929f' : '#2ba1f2'}
+          />
           {isAuth ? <Drawer /> : <Popup />}
         </div>
       </div>

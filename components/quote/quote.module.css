@@ -8,6 +8,16 @@
   overflow: hidden;
 }
 
+.quoteLight {
+  display: flex;
+  flex-direction: column;
+  width: 37rem;
+  border-radius: 1rem;
+  background-color: #fff;
+  border: 1px solid #acb1b6;
+  overflow: hidden;
+}
+
 .quoteNoPhoto {
   display: flex;
   flex-direction: column;
@@ -15,6 +25,17 @@
   border-radius: 1rem;
   background-color: #000;
   border: 1px solid #38444d;
+  border-bottom-style: none;
+  overflow: hidden;
+}
+
+.quoteNoPhotoLight {
+  display: flex;
+  flex-direction: column;
+  width: 37rem;
+  border-radius: 1rem;
+  background-color: #fff;
+  border: 1px solid #acb1b6;
   border-bottom-style: none;
   overflow: hidden;
 }
@@ -30,10 +51,20 @@
   overflow: hidden;
 }
 
+.quotePhotoLight {
+  display: flex;
+  flex-direction: column;
+  max-height: 37rem;
+  width: 37rem;
+  border-radius: 1rem;
+  background-color: #000;
+  border: 1px solid #acb1b6;
+  overflow: hidden;
+}
+
 .quoteHeader {
   width: 100%;
   padding: 1rem;
-  /* background-color: #15202b; */
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: #38444d;
@@ -67,6 +98,16 @@
   margin-right: 0.5rem;
 }
 
+.quoteNameLight {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: bold;
+  color: #000;
+  margin: 0;
+  margin-right: 0.5rem;
+}
+
 .verified {
   height: 13px;
   width: 13px;
@@ -96,6 +137,13 @@
   overflow-wrap: break-word;
   margin: 0;
   color: #fff;
+}
+
+.quoteTextLight {
+  font-size: 14px;
+  overflow-wrap: break-word;
+  margin: 0;
+  color: #000;
 }
 
 .quoteMedia {

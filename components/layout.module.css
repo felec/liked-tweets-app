@@ -6,6 +6,16 @@
   height: 7rem;
 }
 
+.siteName {
+  cursor: pointer;
+  color: #fff;
+}
+
+.siteNameLight {
+  cursor: pointer;
+  color: #2ba1f2;
+}
+
 .leftHeader {
   display: flex;
   width: 100%;
@@ -127,5 +137,15 @@
   outline: none;
   border-radius: 0.5rem;
   border: none;
+  z-index: 10;
+}
+
+.headerInputLight {
+  height: 3rem;
+  width: 100%;
+  padding: 1rem;
+  outline: none;
+  border-radius: 0.5rem;
+  border: 1px solid #acb1b6;
   z-index: 10;
 }

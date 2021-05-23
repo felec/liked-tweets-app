@@ -1,14 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import { UserContext } from '../contexts/UserContext';
 import { ThemeContext } from '../contexts/ThemeContext';
 import '../styles/global.css';
 
 export default function App({ Component, pageProps }) {
-  // const cookieTheme = window.localStorage.getItem('theme');
   const [isAuth, setIsAuth] = useState(false);
-  const [theme, setTheme] = useState(0);
+  const [theme, setTheme] = useState(null);
   const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const cookieTheme = window.localStorage.getItem('theme');
+    setTheme(cookieTheme ?? 'dark');
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>

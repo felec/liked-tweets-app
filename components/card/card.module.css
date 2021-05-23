@@ -8,6 +8,16 @@
   border: 1px solid #38444d;
 }
 
+.cardLight {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 35rem;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid #acb1b6;
+}
+
 .profilePeek {
   content: '';
   position: absolute;
@@ -20,6 +30,24 @@
   border-radius: 1rem;
   box-shadow: 1px 1px 5px #82929f;
   background-color: #15202b;
+  height: 25rem;
+  width: 35rem;
+  z-index: 200;
+  overflow: hidden;
+}
+
+.profilePeekLight {
+  content: '';
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  top: 8%;
+  left: 8%;
+  font-size: 15px;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 1px 1px 5px #acb1b6;
+  background-color: #fff;
   height: 25rem;
   width: 35rem;
   z-index: 200;
@@ -48,6 +76,23 @@
   z-index: 200;
 }
 
+.cardHeader:hover + .profilePeekLight {
+  content: '';
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 8%;
+  left: 8%;
+  font-size: 15px;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 1px 1px 5px #acb1b6;
+  background-color: #fff;
+  height: 25rem;
+  width: 25rem;
+  z-index: 200;
+}
+
 .cardHeaderInfo {
   display: flex;
   flex-direction: column;
@@ -66,6 +111,14 @@
   font-size: 15px;
   font-weight: bold;
   color: #fff;
+  margin: 0;
+}
+
+.nameLight {
+  display: flex;
+  font-size: 15px;
+  font-weight: bold;
+  color: #000;
   margin: 0;
 }
 
@@ -88,6 +141,22 @@
   overflow-wrap: break-word;
 }
 
+.textLight {
+  font-size: 23px;
+  overflow-wrap: break-word;
+  color: #000;
+}
+
+.desc {
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.descLight {
+  margin-bottom: 1rem;
+  color: #000;
+}
+
 .content {
   display: flex;
   justify-content: center;
@@ -103,6 +172,19 @@
   border-radius: 1rem;
   background-color: #000;
   border: 1px solid #38444d;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.cardMediaLight {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 30rem;
+  width: 100%;
+  border-radius: 1rem;
+  background-color: #fff;
+  border: 1px solid #acb1b6;
   overflow: hidden;
   cursor: pointer;
 }
@@ -126,6 +208,12 @@
   width: 100%;
 }
 
+.cardFooterInfoLight {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
 .cardFooterInfo::before {
   content: '';
   position: absolute;
@@ -134,6 +222,16 @@
   height: 1px;
   width: 100%;
   background-color: #38444d;
+}
+
+.cardFooterInfoLight::before {
+  content: '';
+  position: absolute;
+  top: -1%;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background-color: #acb1b6;
 }
 
 .cardFooterInfo::after {
@@ -146,7 +244,22 @@
   background-color: #38444d;
 }
 
+.cardFooterInfoLight::after {
+  content: '';
+  position: absolute;
+  bottom: 1%;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background-color: #acb1b6;
+}
+
 .cardFooterCount {
   color: #fff;
+  font-weight: bold;
+}
+
+.cardFooterCountLight {
+  color: #000;
   font-weight: bold;
 }

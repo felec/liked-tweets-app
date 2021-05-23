@@ -5,6 +5,7 @@ import { cdn } from '../../utils/cdn';
 import { NewTweet } from '../../types/type';
 import styles from './card.module.css';
 import Media from '../../utils/media';
+import { useTheme } from '../../contexts/ThemeContext';
 
 export default function Card({
   tweet,
@@ -14,6 +15,8 @@ export default function Card({
   isTwitter: boolean;
 }) {
   const numAbbr = new NumAbbr(['K', 'M', 'B', 'T']);
+  const { theme, setTheme } = useTheme();
+  const isDark = theme === 'dark';
 
   const created = Date.parse(tweet.created_at);
   const date = new Date(created);
@@ -53,7 +56,7 @@ export default function Card({
   const localDate = `${localList[0]}/${localList[1]}/${year}`;
 
   return (
-    <div className={styles.card}>
+    <div className={isDark ? styles.card : styles.cardLight}>
       <div className={styles.cardHeader}>
         <img
           src={cdn(tweet.profile_image_url_https)}
@@ -62,12 +65,16 @@ export default function Card({
         />
 
         <div className={styles.cardHeaderInfo}>
-          <h2 className={styles.name}>
+          <h2 className={isDark ? styles.name : styles.nameLight}>
             {truncateScrNme(tweet.name)}{' '}
             {tweet.verified && (
               <img
                 className={styles.verified}
-                src='../images/verified-light.png'
+                src={
+                  isDark
+                    ? '../images/verified-light.png'
+                    : '../images/verified-blue.png'
+                }
               />
             )}
           </h2>{' '}
@@ -75,35 +82,47 @@ export default function Card({
         </div>
       </div>
 
-      <div className={styles.profilePeek}>
+      <div className={isDark ? styles.profilePeek : styles.profilePeekLight}>
         <img
           className={styles.avatar}
           src={cdn(tweet.profile_image_url_https)}
           alt='profile pic'
         />
-        <h2 className={styles.name}>
+        <h2 className={isDark ? styles.name : styles.nameLight}>
           {tweet.name}{' '}
           {tweet.verified && (
             <img
               className={styles.verified}
-              src='../images/verified-light.png'
+              src={
+                isDark
+                  ? '../images/verified-light.png'
+                  : '../images/verified-blue.png'
+              }
             />
           )}
         </h2>{' '}
         <h3 className={styles.screenName}>@{tweet.screen_name}</h3>
-        <p style={{ marginBottom: '1rem' }}>
+        <p className={isDark ? styles.desc : styles.descLight}>
           {truncateDescr(tweet.description)}
         </p>
         <div style={{ display: 'flex' }}>
           <p style={{ marginRight: '2rem' }}>
-            <span className={styles.cardFooterCount}>
+            <span
+              className={
+                isDark ? styles.cardFooterCount : styles.cardFooterCountLight
+              }
+            >
               {numAbbr.abbreviate(tweet.friends_count, 1)}
             </span>{' '}
             Following{' '}
           </p>
 
           <p>
-            <span className={styles.cardFooterCount}>
+            <span
+              className={
+                isDark ? styles.cardFooterCount : styles.cardFooterCountLight
+              }
+            >
               {numAbbr.abbreviate(tweet.followers_count, 1)}
             </span>{' '}
             Followers
@@ -112,7 +131,7 @@ export default function Card({
       </div>
 
       <p
-        className={styles.text}
+        className={isDark ? styles.text : styles.textLight}
         dangerouslySetInnerHTML={{ __html: f_text }}
       ></p>
 
@@ -120,7 +139,7 @@ export default function Card({
         {tweet.q_created_at ? (
           <Quote tweet={tweet} isTwitter={isTwitter} />
         ) : tweet.media.length ? (
-          <div className={styles.cardMedia}>
+          <div className={isDark ? styles.cardMedia : styles.cardMediaLight}>
             {Media(tweet.media, isTwitter)}
           </div>
         ) : (
@@ -137,16 +156,28 @@ export default function Card({
           ></span>
         </p>
 
-        <div className={styles.cardFooterInfo}>
+        <div
+          className={
+            isDark ? styles.cardFooterInfo : styles.cardFooterInfoLight
+          }
+        >
           <p style={{ marginRight: '2rem' }}>
-            <span className={styles.cardFooterCount}>
+            <span
+              className={
+                isDark ? styles.cardFooterCount : styles.cardFooterCountLight
+              }
+            >
               {numAbbr.abbreviate(tweet.retweet_count, 1)}
             </span>{' '}
             Retweets and comments{' '}
           </p>
 
           <p>
-            <span className={styles.cardFooterCount}>
+            <span
+              className={
+                isDark ? styles.cardFooterCount : styles.cardFooterCountLight
+              }
+            >
               {numAbbr.abbreviate(tweet.favorite_count, 1)}
             </span>{' '}
             Likes

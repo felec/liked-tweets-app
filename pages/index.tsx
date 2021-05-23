@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
@@ -8,24 +8,28 @@ import {
   AiOutlineClockCircle,
   AiOutlineHeart,
   AiOutlineRetweet,
+  AiOutlineRise,
 } from 'react-icons/ai';
 
 import Layout, { siteTitle } from '../components/layout';
-import SideBar from '../components/sidebar/sidebar';
+import SideBar from '../components/sidebar';
 import Card from '../components/card';
 import { NewTweet, TweetUser } from '../types/type';
 import styles from '../styles/home.module.css';
 import Paginate from '../hooks/paginate';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface HomeProps {
   data: NewTweet[];
   users: TweetUser[];
 }
 
-export default function Home({ data, users }: HomeProps) {
-  const [sortBy, setSortBy] = useState('date');
+function Home({ data, users }: HomeProps) {
+  const [sortBy, setSortBy] = useState('trend');
   const [isLoading, setIsLoading] = useState(false);
   const [useData, setUseData] = useState<NewTweet[]>(data);
+  const { theme, setTheme } = useTheme();
+  const isDark = theme === 'dark';
 
   const handleTrendingSort = async (sort: string) => {
     setSortBy(sort);
@@ -45,17 +49,19 @@ export default function Home({ data, users }: HomeProps) {
         <title>{siteTitle}</title>
       </Head>
 
-      <div className={styles.navBar}>
+      <div className={isDark ? styles.navBar : styles.navBarLight}>
         <Link href='/sports'>
-          <a className={styles.button}>Sports</a>
+          <a className={isDark ? styles.button : styles.buttonLight}>Sports</a>
         </Link>
 
         <Link href='/'>
-          <a className={styles.selected}>Trending</a>
+          <a className={isDark ? styles.selected : styles.selectedLight}>
+            Trending
+          </a>
         </Link>
 
         <Link href='/news'>
-          <a className={styles.button}>News</a>
+          <a className={isDark ? styles.button : styles.buttonLight}>News</a>
         </Link>
       </div>
 
@@ -68,31 +74,57 @@ export default function Home({ data, users }: HomeProps) {
               alignItems: 'center',
             }}
           >
-            <h2 style={{ marginLeft: '8rem' }}>Trending</h2>
-            {isLoading && sortBy === 'date' ? (
-              <h4>Loading...</h4>
-            ) : (
-              <AiOutlineClockCircle
-                onClick={() => handleTrendingSort('date')}
-                size='1.8rem'
-                color={sortBy === 'date' ? '#f5ad35' : 'white'}
-                className={styles.dateSort}
-              />
-            )}
+            <h2
+              className={
+                isDark ? styles.categoryTitle : styles.categoryTitleLight
+              }
+            >
+              Trending
+            </h2>
+            <AiOutlineRise
+              onClick={() => handleTrendingSort('trend')}
+              size='1.8rem'
+              color={
+                sortBy === 'trend' ? '#2795e0' : isDark ? '#82929f' : '#acb1b6'
+              }
+              className={styles.trendSort}
+            />
+
+            <AiOutlineClockCircle
+              onClick={() => handleTrendingSort('date')}
+              size='1.8rem'
+              color={
+                sortBy === 'date' ? '#f5ad35' : isDark ? '#82929f' : '#acb1b6'
+              }
+              className={styles.dateSort}
+            />
 
             <AiOutlineHeart
               onClick={() => handleTrendingSort('favorite')}
               size='1.8rem'
-              color={sortBy === 'favorite' ? '#e2495f' : 'white'}
+              color={
+                sortBy === 'favorite'
+                  ? '#e2495f'
+                  : isDark
+                  ? '#82929f'
+                  : '#acb1b6'
+              }
               className={styles.favSort}
             />
             <AiOutlineRetweet
               onClick={() => handleTrendingSort('retweet')}
               size='1.8rem'
-              color={sortBy === 'retweet' ? '#6cc165' : 'white'}
+              color={
+                sortBy === 'retweet'
+                  ? '#6cc165'
+                  : isDark
+                  ? '#82929f'
+                  : '#acb1b6'
+              }
               className={styles.retweetSort}
             />
           </div>
+
           <ul
             style={{
               listStyle: 'none',
@@ -122,12 +154,13 @@ export default function Home({ data, users }: HomeProps) {
   );
 }
 
+export default memo(Home);
+
 export const getServerSideProps: GetServerSideProps<HomeProps> = async (
   ctx
 ) => {
   const res = await axios(
     `https://peaceful-reef-54258.herokuapp.com/api/v1/trending?per_page=25&page=0`
-    // 'http://localhost:3001/api/v1/trending?per_page=25&page=0'
   );
 
   const data: NewTweet[] = await res.data;
