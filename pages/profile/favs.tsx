@@ -4,12 +4,15 @@ import axios from 'axios';
 import { NewTweet } from '../../types/type';
 import Card from '../../components/card';
 import styles from '../../styles/home.module.css';
+import { useTheme } from '../../contexts/ThemeContext';
 
 export default function Favs() {
   const [favs, setFavs] = useState<NewTweet[]>([]);
   const [lastId, setLastId] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const isDark = theme === 'dark';
 
   const fetchFavs = async () => {
     setIsLoading(true);
@@ -81,7 +84,7 @@ export default function Favs() {
         })}
       </ul>
       <button
-        className={styles.loadMore}
+        className={isDark ? styles.loadMore : styles.loadMoreLight}
         disabled={isLoading || isEnd}
         onClick={async () => {
           await fetchFavs();

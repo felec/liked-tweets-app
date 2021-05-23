@@ -3,11 +3,15 @@ import { useSWRInfinite } from 'swr';
 import axios from 'axios';
 import Card from '../components/card';
 import styles from '../styles/home.module.css';
+import { useTheme } from '../contexts/ThemeContext';
 
 const fetcher = (url) => axios.get(url).then((res) => res.data);
 const PAGE_SIZE = 25;
 
 export default function Paginate(category: string, sortBy: string) {
+  const { theme, setTheme } = useTheme();
+  const isDark = theme === 'dark';
+
   const { data, error, mutate, size, setSize, isValidating } = useSWRInfinite(
     (index) =>
       `https://peaceful-reef-54258.herokuapp.com/api/v1/${category}?sort_by=${sortBy}&per_page=${PAGE_SIZE}&page=${
@@ -50,7 +54,7 @@ export default function Paginate(category: string, sortBy: string) {
         );
       })}
       <button
-        className={styles.loadMore}
+        className={isDark ? styles.loadMore : styles.loadMoreLight}
         disabled={isLoadingMore || isReachingEnd}
         onClick={() => setSize(size + 1)}
       >

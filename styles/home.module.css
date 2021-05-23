@@ -247,21 +247,30 @@
   cursor: pointer;
   border: none;
   border-radius: 0.5rem;
-  box-shadow: inset 0 0 10px #000;
+  box-shadow: -2px 0 5px #000;
 }
 
-.loadMore:hover {
+.loadMoreLight {
   display: flex;
   justify-content: center;
   align-items: 'center';
   height: 3rem;
   width: 30rem;
   padding-top: 0.5rem;
-  color: #71c9f8;
+  background-color: #fff;
+  color: #15202b;
   font-size: 15px;
   font-weight: bold;
   cursor: pointer;
   border: none;
   border-radius: 0.5rem;
-  box-shadow: inset 0 0 10px #000;
+  box-shadow: -2px 0 5px #82929f;
+}
+
+.loadMore:hover {
+  color: #71c9f8;
+}
+
+.loadMoreLight:hover {
+  color: #2ba1f2;
 }

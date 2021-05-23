@@ -70,15 +70,17 @@ function User() {
 
       <div className={isDark ? styles.navBar : styles.navBarLight}>
         <Link href='/sports'>
-          <a className={styles.button}>Sports</a>
+          <a className={isDark ? styles.button : styles.buttonLight}>Sports</a>
         </Link>
 
         <Link href='/'>
-          <a className={styles.button}>Trending</a>
+          <a className={isDark ? styles.button : styles.buttonLight}>
+            Trending
+          </a>
         </Link>
 
         <Link href='/news'>
-          <a className={styles.button}>News</a>
+          <a className={isDark ? styles.button : styles.buttonLight}>News</a>
         </Link>
 
         <div className={styles.selected}>Favs</div>
