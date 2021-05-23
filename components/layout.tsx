@@ -14,9 +14,9 @@ export const siteTitle = 'Liked Tweets';
 
 export default function Layout({ children }) {
   const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const { isAuth, setIsAuth } = useAuth();
   const { theme, setTheme } = useTheme();
-  const [searchQuery, setSearchQuery] = useState<string>('');
   const isDark = theme === 'dark';
 
   const handleSearchQueryInput = (e: ChangeEvent<HTMLInputElement>) => {

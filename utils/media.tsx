@@ -10,6 +10,7 @@ export default function Media(media: NewMedia[], isTwitter: boolean) {
   const [isModal, setIsModal] = useState(false);
   const [url, setUrl] = useState<string | null>(null);
   const [size, setSize] = useState<number[] | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const closeModal = () => {
     setIsModal(false);
@@ -21,18 +22,23 @@ export default function Media(media: NewMedia[], isTwitter: boolean) {
     setIsModal(true);
   };
 
+  const handleVideoPressed = () => {
+    setIsPlaying(!isPlaying);
+  };
+
   const renderMediaType = () => {
     if (media.length === 1) {
       return media.map((m) => {
         switch (m.type) {
           case 'video':
             return (
-              <ReactPlayer
-                key={m.id_str}
-                url={isTwitter ? m.url : cdn(m.url)}
-                loop={true}
-                controls={true}
-              />
+              <div onClick={handleVideoPressed}>
+                <ReactPlayer
+                  key={m.id_str}
+                  url={isTwitter ? m.url : cdn(m.url)}
+                  playing={isPlaying}
+                />
+              </div>
             );
           case 'photo':
             return (

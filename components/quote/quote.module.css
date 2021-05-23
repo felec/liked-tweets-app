@@ -72,6 +72,16 @@
   overflow: hidden;
 }
 
+.quoteHeaderLight {
+  width: 100%;
+  padding: 1rem;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #acb1b6;
+  z-index: 10;
+  overflow: hidden;
+}
+
 .quoteInfo {
   display: flex;
   height: 24px;
@@ -152,6 +162,16 @@
   max-height: 20rem;
   width: 100%;
   background-color: #000;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.quoteMediaLight {
+  display: flex;
+  max-height: 20rem;
+  width: 100%;
+  background-color: #fff;
   justify-content: center;
   align-items: center;
   cursor: pointer;

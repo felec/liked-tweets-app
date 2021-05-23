@@ -54,7 +54,7 @@ export default function Quote({ tweet, isTwitter }: ContentProps) {
   return (
     <div className={quoteClassName()}>
       <div
-        className={styles.quoteHeader}
+        className={isDark ? styles.quoteHeader : styles.quoteHeaderLight}
         style={{ backgroundColor: themeColor }}
       >
         <div className={styles.quoteInfo}>
@@ -73,7 +73,10 @@ export default function Quote({ tweet, isTwitter }: ContentProps) {
         ></p>
       </div>
 
-      <div key={tweet.id_str} className={styles.quoteMedia}>
+      <div
+        key={tweet.id_str}
+        className={isDark ? styles.quoteMedia : styles.quoteMediaLight}
+      >
         {Media(tweet.media, isTwitter)}
       </div>
     </div>
