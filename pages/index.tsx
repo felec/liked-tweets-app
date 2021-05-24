@@ -41,7 +41,8 @@ function Home({ data, users }: HomeProps) {
     setIsLoading(true);
 
     const res = await axios(
-      `https://peaceful-reef-54258.herokuapp.com/api/v1/trending?per_page=25&page=0&sort_by=${sort}`
+      `https://peaceful-reef-54258.herokuapp.com/api/v1/trending?per_page=25&page=0&sort_by=${sort}`,
+      { withCredentials: true }
     );
 
     setUseData(res.data);
@@ -175,13 +176,16 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
   ctx
 ) => {
   const res = await axios(
-    `https://peaceful-reef-54258.herokuapp.com/api/v1/trending?per_page=25&page=0`
+    `https://peaceful-reef-54258.herokuapp.com/api/v1/trending?per_page=25&page=0`,
+    { withCredentials: true }
+    // { headers: ctx.req ? { cookie: ctx.req.headers.cookie } : undefined }
   );
 
   const data: NewTweet[] = await res.data;
 
   const res2 = await axios(
-    'https://peaceful-reef-54258.herokuapp.com/api/v1/trending/top-users'
+    'https://peaceful-reef-54258.herokuapp.com/api/v1/trending/top-users',
+    { withCredentials: true }
   );
 
   const users: TweetUser[] = await res2.data;

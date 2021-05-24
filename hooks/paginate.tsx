@@ -5,7 +5,8 @@ import Card from '../components/card';
 import styles from '../styles/home.module.css';
 import { useTheme } from '../contexts/ThemeContext';
 
-const fetcher = (url) => axios.get(url).then((res) => res.data);
+const fetcher = (url: string) =>
+  axios(url, { withCredentials: true }).then((res) => res.data);
 const PAGE_SIZE = 25;
 
 export default function Paginate(category: string, sortBy: string) {

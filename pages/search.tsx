@@ -74,7 +74,8 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
   const res = await axios(
     encodeURI(
       `https://peaceful-reef-54258.herokuapp.com/api/v1/trending/search?q=${ctx.query.q}`
-    )
+    ),
+    { withCredentials: true }
   );
   const data: NewTweet[] = await res.data;
 

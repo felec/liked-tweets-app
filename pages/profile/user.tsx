@@ -83,7 +83,7 @@ function User() {
           <a className={isDark ? styles.button : styles.buttonLight}>News</a>
         </Link>
 
-        <div className={styles.selected}>Favs</div>
+        <div className={styles.selected}>Likes</div>
       </div>
 
       <section style={{ minHeight: '100vh' }} className={styles.home}>
