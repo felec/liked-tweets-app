@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -17,6 +17,7 @@ import { NewTweet, TweetUser } from '../types/type';
 import styles from '../styles/home.module.css';
 import Paginate from '../hooks/paginate';
 import { useTheme } from '../contexts/ThemeContext';
+import { useLoading } from '../contexts/LoadContext';
 
 interface HomeProps {
   data: NewTweet[];
@@ -25,10 +26,14 @@ interface HomeProps {
 
 function News({ data, users }: HomeProps) {
   const [sortBy, setSortBy] = useState('trend');
-  const [isLoading, setIsLoading] = useState(false);
   const [useData, setUseData] = useState<NewTweet[]>(data);
+  const { isLoading, setIsLoading } = useLoading();
   const { theme, setTheme } = useTheme();
   const isDark = theme === 'dark';
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
 
   const handleTrendingSort = async (sort: string) => {
     setSortBy(sort);
@@ -37,10 +42,9 @@ function News({ data, users }: HomeProps) {
     const res = await axios(
       `https://peaceful-reef-54258.herokuapp.com/api/v1/news?per_page=25&page=0&sort_by=${sort}`
     );
-    setIsLoading(false);
 
-    const data = res.data;
-    setUseData(data);
+    setUseData(res.data);
+    setIsLoading(false);
   };
 
   return (
@@ -51,11 +55,19 @@ function News({ data, users }: HomeProps) {
 
       <div className={isDark ? styles.navBar : styles.navBarLight}>
         <Link href='/sports'>
-          <a className={isDark ? styles.button : styles.buttonLight}>Sports</a>
+          <a
+            onClick={() => setIsLoading(true)}
+            className={isDark ? styles.button : styles.buttonLight}
+          >
+            Sports
+          </a>
         </Link>
 
         <Link href='/'>
-          <a className={isDark ? styles.button : styles.buttonLight}>
+          <a
+            onClick={() => setIsLoading(true)}
+            className={isDark ? styles.button : styles.buttonLight}
+          >
             Trending
           </a>
         </Link>

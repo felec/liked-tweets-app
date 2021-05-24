@@ -32,9 +32,8 @@ export default function Media(media: NewMedia[], isTwitter: boolean) {
         switch (m.type) {
           case 'video':
             return (
-              <div onClick={handleVideoPressed}>
+              <div key={m.id_str} onClick={handleVideoPressed}>
                 <ReactPlayer
-                  key={m.id_str}
                   url={isTwitter ? m.url : cdn(m.url)}
                   playing={isPlaying}
                 />

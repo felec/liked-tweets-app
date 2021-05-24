@@ -3,9 +3,11 @@ import { AuthContext } from '../contexts/AuthContext';
 import { UserContext } from '../contexts/UserContext';
 import { ThemeContext } from '../contexts/ThemeContext';
 import '../styles/global.css';
+import { LoadContext } from '../contexts/LoadContext';
 
 export default function App({ Component, pageProps }) {
   const [isAuth, setIsAuth] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [theme, setTheme] = useState(null);
   const [user, setUser] = useState(null);
 
@@ -16,11 +18,13 @@ export default function App({ Component, pageProps }) {
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <AuthContext.Provider value={{ isAuth, setIsAuth }}>
-        <UserContext.Provider value={{ user, setUser }}>
-          <Component {...pageProps} />;
-        </UserContext.Provider>
-      </AuthContext.Provider>
+      <LoadContext.Provider value={{ isLoading, setIsLoading }}>
+        <AuthContext.Provider value={{ isAuth, setIsAuth }}>
+          <UserContext.Provider value={{ user, setUser }}>
+            <Component {...pageProps} />;
+          </UserContext.Provider>
+        </AuthContext.Provider>
+      </LoadContext.Provider>
     </ThemeContext.Provider>
   );
 }

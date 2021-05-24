@@ -4,7 +4,7 @@ import axios from 'axios';
 import styles from './popup.module.css';
 
 export default function Popup() {
-  const [popup, setPopup] = useState(false);
+  const [isPopup, setIsPopup] = useState(false);
   const [url, setUrl] = useState<string | null>(null);
 
   useEffect(() => {
@@ -24,34 +24,38 @@ export default function Popup() {
     loginUser();
   }, []);
 
-  return popup ? (
-    <div onClick={() => setPopup(false)} className={styles.backdrop}>
-      <div onClick={(e) => e.stopPropagation()} className={styles.popup}>
-        <img
-          className={styles.icon}
-          src='../images/twitter-brands.svg'
-          alt='twitter logo'
-        />
-        <div
-          onClick={async () => {
-            try {
-              url ? (window.location.href = url) : null;
-            } catch (err) {
-              console.log(err);
-            }
-          }}
-          className={styles.login}
-        >
-          Login with Twitter
+  return (
+    <>
+      <img
+        onClick={() => setIsPopup(!isPopup)}
+        className={styles.user}
+        src='../images/user.png'
+        alt='user-avatar'
+      />
+
+      {isPopup && (
+        <div onClick={() => setIsPopup(false)} className={styles.backdrop}>
+          <div onClick={(e) => e.stopPropagation()} className={styles.popup}>
+            <img
+              className={styles.icon}
+              src='../images/twitter-brands.svg'
+              alt='twitter logo'
+            />
+            <div
+              onClick={async () => {
+                try {
+                  url ? (window.location.href = url) : null;
+                } catch (err) {
+                  console.log(err);
+                }
+              }}
+              className={styles.login}
+            >
+              Login with Twitter
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  ) : (
-    <img
-      onClick={() => setPopup(!popup)}
-      className={styles.user}
-      src='../images/user.png'
-      alt='user-avatar'
-    />
+      )}
+    </>
   );
 }

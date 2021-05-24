@@ -9,6 +9,7 @@ import Drawer from './drawer';
 import styles from './layout.module.css';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
+import { useLoading } from '../contexts/LoadContext';
 
 export const siteTitle = 'Liked Tweets';
 
@@ -16,6 +17,7 @@ export default function Layout({ children }) {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const { isAuth, setIsAuth } = useAuth();
+  const { isLoading, setIsLoading } = useLoading();
   const { theme, setTheme } = useTheme();
   const isDark = theme === 'dark';
 
@@ -49,6 +51,7 @@ export default function Layout({ children }) {
         />
         <meta name='og:title' content={siteTitle} />
       </Head>
+      {isLoading && <div className={styles.loading}></div>}
       <div className={styles.headerDiv}>
         <div className={styles.leftHeader}>
           <header className={styles.innerHeader}>

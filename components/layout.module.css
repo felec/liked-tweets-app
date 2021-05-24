@@ -6,6 +6,56 @@
   height: 7rem;
 }
 
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100vw;
+  background: linear-gradient(
+    120deg,
+    rgba(15, 111, 226, 1) 25%,
+    rgba(2, 171, 228, 1) 55%,
+    rgba(0, 212, 255, 1) 85%
+  );
+  animation: slide-gradient 0.5s ease infinite;
+}
+
+@keyframes slide-gradient {
+  0% {
+    background: linear-gradient(
+      120deg,
+      rgba(0, 212, 255, 1) 25%,
+      rgba(15, 111, 226, 1) 55%,
+      rgba(2, 171, 228, 1) 85%
+    );
+  }
+  50% {
+    background: linear-gradient(
+      120deg,
+      rgba(2, 171, 228, 1) 25%,
+      rgba(0, 212, 255, 1) 55%,
+      rgba(15, 111, 226, 1) 85%
+    );
+  }
+  75% {
+    background: linear-gradient(
+      120deg,
+      rgba(15, 111, 226, 1) 25%,
+      rgba(2, 171, 228, 1) 55%,
+      rgba(0, 212, 255, 1) 85%
+    );
+  }
+  100% {
+    background: linear-gradient(
+      120deg,
+      rgba(0, 212, 255, 1) 25%,
+      rgba(15, 111, 226, 1) 55%,
+      rgba(2, 171, 228, 1) 85%
+    );
+  }
+}
+
 .siteName {
   cursor: pointer;
   color: #fff;

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import NumAbbr from 'number-abbreviate';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import styles from './drawer.module.css';
 import axios from 'axios';
@@ -30,125 +31,148 @@ export default function Drawer() {
     }
   };
 
-  return drawer ? (
-    <div onClick={() => setDrawer(false)} className={styles.backdrop}>
-      <div className={isDark ? styles.drawer : styles.drawerLight}>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <a
-            onClick={logoutUser}
-            className={styles.logout}
-            href='javaScript:void(0);'
+  return (
+    <div>
+      <img
+        onClick={() => setDrawer(!drawer)}
+        className={styles.avatar}
+        src={user ? user.profile_image_url_https : defAvatar}
+        alt='user-avatar'
+      />
+      <AnimatePresence>
+        {drawer && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => setDrawer(false)}
+            className={styles.backdrop}
           >
-            Logout
-          </a>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <img
-              className={styles.avatar}
-              src={user.profile_image_url_https}
-              alt='profile pic'
-            />
-
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                marginLeft: '1rem',
-              }}
+            <motion.div
+              initial={{ x: 200 }}
+              animate={{ x: 0 }}
+              transition={{ duration: 0.25 }}
+              exit={{ x: 200 }}
+              className={isDark ? styles.drawer : styles.drawerLight}
             >
-              <div style={{ display: 'flex' }}>
-                <h3 className={isDark ? styles.name : styles.nameLight}>
-                  {user.name}
-                </h3>
-                {user.verified && (
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
+                <a
+                  onClick={logoutUser}
+                  className={styles.logout}
+                  href='javaScript:void(0);'
+                >
+                  Logout
+                </a>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
                   <img
-                    className={styles.verified}
-                    src='../images/verified-light.png'
+                    className={styles.avatar}
+                    src={user.profile_image_url_https}
+                    alt='profile pic'
                   />
-                )}
+
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      marginLeft: '1rem',
+                    }}
+                  >
+                    <div style={{ display: 'flex' }}>
+                      <h3 className={isDark ? styles.name : styles.nameLight}>
+                        {user.name}
+                      </h3>
+                      {user.verified && (
+                        <img
+                          className={styles.verified}
+                          src='../images/verified-light.png'
+                        />
+                      )}
+                    </div>
+                    <h3 className={styles.screenName}>@{user.screen_name}</h3>
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-evenly',
+                    margin: '.5rem 0',
+                  }}
+                >
+                  <p
+                    className={
+                      isDark
+                        ? styles.cardFooterCount
+                        : styles.cardFooterCountLight
+                    }
+                    style={{ marginRight: '1rem' }}
+                  >
+                    {numAbbr.abbreviate(user.friends_count, 2)} <br />{' '}
+                    <span
+                      style={{
+                        fontSize: '1.2rem',
+                        fontWeight: 'normal',
+                        color: '#82929f',
+                      }}
+                    >
+                      Following
+                    </span>
+                  </p>
+
+                  <p
+                    className={
+                      isDark
+                        ? styles.cardFooterCount
+                        : styles.cardFooterCountLight
+                    }
+                    style={{ marginRight: '1rem' }}
+                  >
+                    {numAbbr.abbreviate(user.followers_count, 2)} <br />{' '}
+                    <span
+                      style={{
+                        fontSize: '1.2rem',
+                        fontWeight: 'normal',
+                        color: '#82929f',
+                      }}
+                    >
+                      Followers
+                    </span>
+                  </p>
+
+                  <p
+                    className={
+                      isDark
+                        ? styles.cardFooterCount
+                        : styles.cardFooterCountLight
+                    }
+                  >
+                    {numAbbr.abbreviate(user.favourites_count, 2)} <br />{' '}
+                    <span
+                      style={{
+                        fontSize: '1.2rem',
+                        fontWeight: 'normal',
+                        color: '#82929f',
+                      }}
+                    >
+                      Favorites
+                    </span>
+                  </p>
+                </div>
+
+                <p className={isDark ? styles.desc : styles.descLight}>
+                  {user?.description}
+                </p>
               </div>
-              <h3 className={styles.screenName}>@{user.screen_name}</h3>
-            </div>
-          </div>
-
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-evenly',
-              margin: '.5rem 0',
-            }}
-          >
-            <p
-              className={
-                isDark ? styles.cardFooterCount : styles.cardFooterCountLight
-              }
-              style={{ marginRight: '1rem' }}
-            >
-              {numAbbr.abbreviate(user.friends_count, 2)} <br />{' '}
-              <span
-                style={{
-                  fontSize: '1.2rem',
-                  fontWeight: 'normal',
-                  color: '#82929f',
-                }}
-              >
-                Following
-              </span>
-            </p>
-
-            <p
-              className={
-                isDark ? styles.cardFooterCount : styles.cardFooterCountLight
-              }
-              style={{ marginRight: '1rem' }}
-            >
-              {numAbbr.abbreviate(user.followers_count, 2)} <br />{' '}
-              <span
-                style={{
-                  fontSize: '1.2rem',
-                  fontWeight: 'normal',
-                  color: '#82929f',
-                }}
-              >
-                Followers
-              </span>
-            </p>
-
-            <p
-              className={
-                isDark ? styles.cardFooterCount : styles.cardFooterCountLight
-              }
-            >
-              {numAbbr.abbreviate(user.favourites_count, 2)} <br />{' '}
-              <span
-                style={{
-                  fontSize: '1.2rem',
-                  fontWeight: 'normal',
-                  color: '#82929f',
-                }}
-              >
-                Favorites
-              </span>
-            </p>
-          </div>
-
-          <p className={isDark ? styles.desc : styles.descLight}>
-            {user.description}
-          </p>
-        </div>
-      </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
-  ) : (
-    <img
-      onClick={() => setDrawer(!drawer)}
-      className={styles.avatar}
-      src={user ? user.profile_image_url_https : defAvatar}
-      alt='user-avatar'
-    />
   );
 }
