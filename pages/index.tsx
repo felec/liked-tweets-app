@@ -177,15 +177,21 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
 ) => {
   const res = await axios(
     `https://peaceful-reef-54258.herokuapp.com/api/v1/trending?per_page=25&page=0`,
-    { withCredentials: true }
-    // { headers: ctx.req ? { cookie: ctx.req.headers.cookie } : undefined }
+
+    {
+      withCredentials: true,
+      headers: ctx.req ? { cookie: ctx.req.headers.cookie } : undefined,
+    }
   );
 
   const data: NewTweet[] = await res.data;
 
   const res2 = await axios(
     'https://peaceful-reef-54258.herokuapp.com/api/v1/trending/top-users',
-    { withCredentials: true }
+    {
+      withCredentials: true,
+      headers: ctx.req ? { cookie: ctx.req.headers.cookie } : undefined,
+    }
   );
 
   const users: TweetUser[] = await res2.data;
