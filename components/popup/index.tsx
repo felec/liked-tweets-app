@@ -20,9 +20,10 @@ export default function Popup() {
         console.log(err);
       }
     };
-
-    loginUser();
-  }, []);
+    if (isPopup) {
+      loginUser();
+    }
+  }, [isPopup]);
 
   return (
     <>
