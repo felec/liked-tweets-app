@@ -180,7 +180,7 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
 
     {
       withCredentials: true,
-      headers: ctx.req ? { cookie: ctx.req.headers.cookie } : undefined,
+      headers: { cookie: ctx.req?.headers?.cookie ?? null },
     }
   );
 
@@ -190,7 +190,7 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
     'https://peaceful-reef-54258.herokuapp.com/api/v1/trending/top-users',
     {
       withCredentials: true,
-      headers: ctx.req ? { cookie: ctx.req.headers.cookie } : undefined,
+      headers: { cookie: ctx.req?.headers?.cookie ?? null },
     }
   );
 

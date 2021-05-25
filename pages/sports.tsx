@@ -178,7 +178,7 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
     `https://peaceful-reef-54258.herokuapp.com/api/v1/sports?per_page=25&page=0`,
     {
       withCredentials: true,
-      headers: ctx.req ? { cookie: ctx.req.headers.cookie } : undefined,
+      headers: { cookie: ctx.req?.headers?.cookie ?? null },
     }
   );
 
@@ -188,7 +188,7 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
     'https://peaceful-reef-54258.herokuapp.com/api/v1/sports/top-users',
     {
       withCredentials: true,
-      headers: ctx.req ? { cookie: ctx.req.headers.cookie } : undefined,
+      headers: { cookie: ctx.req?.headers?.cookie ?? null },
     }
   );
 

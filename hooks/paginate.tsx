@@ -20,13 +20,6 @@ export default function Paginate(category: string, sortBy: string) {
       }`,
     fetcher
   );
-  // const { data, error, mutate, size, setSize, isValidating } = useSWRInfinite(
-  //   (index) =>
-  //     `http://localhost:3001/api/v1/${category}?per_page=${PAGE_SIZE}&page=${
-  //       index + 1
-  //     }`,
-  //   fetcher
-  // );
 
   const tweets = data ? [].concat(...data) : [];
   const isLoadingInitialData = !data && !error;

@@ -77,7 +77,7 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
     ),
     {
       withCredentials: true,
-      headers: ctx.req ? { cookie: ctx.req.headers.cookie } : undefined,
+      headers: { cookie: ctx.req?.headers?.cookie ?? null },
     }
   );
   const data: NewTweet[] = await res.data;
