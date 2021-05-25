@@ -15,7 +15,6 @@ import SideBar from '../components/sidebar';
 import Card from '../components/card';
 import { NewTweet, TweetUser } from '../types/type';
 import styles from '../styles/home.module.css';
-import Paginate from '../hooks/paginate';
 import { useTheme } from '../contexts/ThemeContext';
 import { useLoading } from '../contexts/LoadContext';
 import { useAuth } from '../contexts/AuthContext';
