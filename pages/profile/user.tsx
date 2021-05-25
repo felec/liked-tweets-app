@@ -24,16 +24,9 @@ function User() {
   useEffect(() => {
     const getAuth = async () => {
       try {
-        await fetch(
+        await axios(
           `https://peaceful-reef-54258.herokuapp.com/api/v1/auth/authenticate?oauth_token=${token}&oauth_verifier=${verifier}`,
-          {
-            method: 'GET',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
-            credentials: 'same-origin',
-          }
+          { withCredentials: true }
         );
 
         setIsVerified(true);
