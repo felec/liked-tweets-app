@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
 import Favs from './favs';
 import styles from '../../styles/home.module.css';
@@ -21,7 +20,6 @@ function User() {
   const verifier = query['oauth_verifier'];
   const { theme, setTheme } = useTheme();
   const isDark = theme === 'dark';
-  const cookie = Cookies.get('logged');
 
   useEffect(() => {
     const getAuth = async () => {
@@ -50,17 +48,19 @@ function User() {
           { withCredentials: true }
         );
 
-        setUser(res.data);
-        setIsAuth(true);
+        const { user, logged } = res.data;
+
+        setUser(user);
+        setIsAuth(logged);
       } catch (err) {
         console.log(err);
       }
     };
 
-    if (isVerified || cookie) {
+    if (isVerified || isAuth) {
       getUser();
     }
-  }, [isVerified, cookie]);
+  }, [isVerified, isAuth]);
 
   return (
     <Layout>

@@ -19,22 +19,49 @@ import styles from '../styles/home.module.css';
 import Paginate from '../hooks/paginate';
 import { useTheme } from '../contexts/ThemeContext';
 import { useLoading } from '../contexts/LoadContext';
+import { useAuth } from '../contexts/AuthContext';
 
 interface HomeProps {
-  data: NewTweet[];
+  tweets: NewTweet[];
+  logged: boolean;
   users: TweetUser[];
 }
 
-function Home({ data, users }: HomeProps) {
+function Home({ tweets, logged, users }: HomeProps) {
   const [sortBy, setSortBy] = useState('trend');
-  const [useData, setUseData] = useState<NewTweet[]>(data);
+  const [page, setPage] = useState(1);
+  const [isEnd, setIsEnd] = useState(false);
+  const [loadMore, setLoadMore] = useState(false);
+  const [useData, setUseData] = useState<NewTweet[]>(tweets);
   const { theme, setTheme } = useTheme();
+  const { isAuth, setIsAuth } = useAuth();
   const { isLoading, setIsLoading } = useLoading();
   const isDark = theme === 'dark';
 
   useEffect(() => {
     setIsLoading(false);
   }, []);
+
+  const fetchTweets = async () => {
+    setLoadMore(true);
+
+    try {
+      const res = await axios(
+        `https://peaceful-reef-54258.herokuapp.com/api/v1/trending?sort_by=${sortBy}&per_page=25&page=${page}`,
+        { withCredentials: true }
+      );
+
+      const tweets: NewTweet[] = res.data['tweets'];
+
+      setUseData([...useData, ...tweets]);
+      setPage(page + 1);
+      setIsEnd(!tweets.length);
+    } catch (err) {
+      console.log(err);
+    }
+
+    setLoadMore(false);
+  };
 
   const handleTrendingSort = async (sort: string) => {
     setSortBy(sort);
@@ -45,7 +72,10 @@ function Home({ data, users }: HomeProps) {
       { withCredentials: true }
     );
 
-    setUseData(res.data);
+    const { tweets, logged } = res.data;
+
+    setUseData(tweets);
+    setIsAuth(logged);
     setIsLoading(false);
   };
 
@@ -159,7 +189,18 @@ function Home({ data, users }: HomeProps) {
                 </li>
               );
             })}
-            {Paginate('trending', sortBy)}
+            <button
+              style={{ marginBottom: '8rem' }}
+              className={isDark ? styles.loadMore : styles.loadMoreLight}
+              disabled={loadMore || isEnd}
+              onClick={async () => fetchTweets()}
+            >
+              {loadMore
+                ? 'Loading...'
+                : isEnd
+                ? 'No More Tweets'
+                : 'Load More Tweets'}
+            </button>
           </ul>
         </section>
         <section className={styles.sidebar}>
@@ -184,7 +225,7 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
     }
   );
 
-  const data: NewTweet[] = await res.data;
+  const { tweets, logged } = await res.data;
 
   const res2 = await axios(
     'https://peaceful-reef-54258.herokuapp.com/api/v1/trending/top-users',
@@ -198,7 +239,8 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
 
   return {
     props: {
-      data,
+      tweets,
+      logged,
       users,
     },
   };

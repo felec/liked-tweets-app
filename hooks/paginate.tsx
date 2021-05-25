@@ -5,6 +5,8 @@ import Card from '../components/card';
 import styles from '../styles/home.module.css';
 import { useTheme } from '../contexts/ThemeContext';
 
+// NOT IN USE
+
 const fetcher = (url: string) =>
   axios(url, { withCredentials: true }).then((res) => res.data);
 const PAGE_SIZE = 25;
