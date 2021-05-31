@@ -26,7 +26,9 @@ function User() {
       try {
         await axios(
           `https://peaceful-reef-54258.herokuapp.com/api/v1/auth/authenticate?oauth_token=${token}&oauth_verifier=${verifier}`,
-          { withCredentials: true }
+          {
+            withCredentials: true,
+          }
         );
 
         setIsVerified(true);
