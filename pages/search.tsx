@@ -15,7 +15,7 @@ interface HomeProps {
 }
 
 function Search(props: HomeProps) {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const isDark = theme === 'dark';
 
   return (
@@ -40,7 +40,10 @@ function Search(props: HomeProps) {
         </Link>
       </div>
 
-      <section className={styles.home}>
+      <section
+        style={{ display: 'flex', minHeight: '100vh', justifyContent: 'start' }}
+        className={styles.home}
+      >
         <h2 className={isDark ? styles.seachTitle : styles.seachTitleLight}>
           Search Results
         </h2>

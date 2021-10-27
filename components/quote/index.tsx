@@ -1,8 +1,8 @@
 import { cdn } from '../../utils/cdn';
 import { NewTweet } from '../../types/type';
 import styles from './quote.module.css';
-import { truncateNames } from '../../utils/truncate-names';
 import Media from '../../utils/media';
+import { truncateNames } from '../../utils/truncate-names';
 import { useTheme } from '../../contexts/ThemeContext';
 
 interface ContentProps {
@@ -35,6 +35,13 @@ export default function Quote({ tweet, isTwitter }: ContentProps) {
       })
       .join(' ');
   }
+
+  const truncateQText = (desc: string) => {
+    if (desc.length > 240) {
+      return `${desc.slice(0, 241)}...`;
+    }
+    return desc;
+  };
 
   const quoteClassName = () => {
     if (tweet.media.length) {
@@ -69,7 +76,7 @@ export default function Quote({ tweet, isTwitter }: ContentProps) {
 
         <p
           className={isDark ? styles.quoteText : styles.quoteTextLight}
-          dangerouslySetInnerHTML={{ __html: q_text }}
+          dangerouslySetInnerHTML={{ __html: truncateQText(q_text) }}
         ></p>
       </div>
 

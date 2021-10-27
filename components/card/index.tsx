@@ -2,9 +2,9 @@ import NumAbbr from 'number-abbreviate';
 
 import Quote from '../quote';
 import { cdn } from '../../utils/cdn';
+import Media from '../../utils/media';
 import { NewTweet } from '../../types/type';
 import styles from './card.module.css';
-import Media from '../../utils/media';
 import { useTheme } from '../../contexts/ThemeContext';
 
 export default function Card({
@@ -39,8 +39,8 @@ export default function Card({
   };
 
   const truncateDescr = (desc: string) => {
-    if (desc.length > 85) {
-      return `${desc.slice(0, 86)}...`;
+    if (desc.length > 65) {
+      return `${desc.slice(0, 66)}...`;
     }
     return desc;
   };

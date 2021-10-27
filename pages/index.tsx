@@ -32,9 +32,9 @@ function Home({ tweets, logged, users }: HomeProps) {
   const [isEnd, setIsEnd] = useState(false);
   const [loadMore, setLoadMore] = useState(false);
   const [useData, setUseData] = useState<NewTweet[]>(tweets);
-  const { theme, setTheme } = useTheme();
-  const { isAuth, setIsAuth } = useAuth();
-  const { isLoading, setIsLoading } = useLoading();
+  const { theme } = useTheme();
+  const { setIsAuth } = useAuth();
+  const { setIsLoading } = useLoading();
   const isDark = theme === 'dark';
 
   useEffect(() => {

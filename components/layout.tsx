@@ -1,8 +1,8 @@
 import { useState, ChangeEvent } from 'react';
-import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
-import { FaRegLightbulb } from 'react-icons/fa';
+import { useRouter } from 'next/router';
+import { FaRegLightbulb, FaGithub } from 'react-icons/fa';
 
 import Popup from './popup';
 import Drawer from './drawer';
@@ -16,8 +16,8 @@ export const siteTitle = 'Liked Tweets';
 export default function Layout({ children }) {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const { isAuth, setIsAuth } = useAuth();
-  const { isLoading, setIsLoading } = useLoading();
+  const { isAuth } = useAuth();
+  const { isLoading } = useLoading();
   const { theme, setTheme } = useTheme();
   const isDark = theme === 'dark';
 
@@ -39,7 +39,13 @@ export default function Layout({ children }) {
   const themeColor = isDark ? '#15202b' : '#fff';
 
   return (
-    <div style={{ position: 'relative', backgroundColor: themeColor }}>
+    <div
+      style={{
+        height: '100%',
+        position: 'relative',
+        backgroundColor: themeColor,
+      }}
+    >
       <Head>
         <link rel='icon' href='/favicon.ico' />
         <meta name='description' content='The most liked tweets on Twitter' />
@@ -83,7 +89,21 @@ export default function Layout({ children }) {
         </div>
       </div>
 
-      <main>{children}</main>
+      <div>{children}</div>
+
+      <footer className={styles.footer}>
+        <p>View source on Github</p>
+
+        <Link href='https://github.com/felec/liked-tweets-app' passHref={true}>
+          <FaGithub
+            style={{
+              marginLeft: '8px',
+              cursor: 'pointer',
+            }}
+            size={20}
+          />
+        </Link>
+      </footer>
     </div>
   );
 }

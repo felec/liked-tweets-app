@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import { UserContext } from '../contexts/UserContext';
 import { ThemeContext } from '../contexts/ThemeContext';
-import '../styles/global.css';
 import { LoadContext } from '../contexts/LoadContext';
+import '../styles/global.css';
 
 export default function App({ Component, pageProps }) {
   const [isAuth, setIsAuth] = useState(false);
