@@ -2,7 +2,6 @@ import { memo, useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import axios from 'axios';
 import {
   AiOutlineClockCircle,
   AiOutlineHeart,
@@ -10,14 +9,16 @@ import {
   AiOutlineRise,
 } from 'react-icons/ai';
 
-import Layout, { siteTitle } from '../components/layout';
-import SideBar from '../components/sidebar';
-import Card from '../components/card';
+import { likedTweets } from '../api';
 import { NewTweet, TweetUser } from '../types/type';
-import styles from '../styles/home.module.css';
+import Card from '../components/card';
+import Tabbar from '../components/tabbar';
+import SideBar from '../components/sidebar';
+import Layout, { siteTitle } from '../components/layout';
+import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
 import { useLoading } from '../contexts/LoadContext';
-import { useAuth } from '../contexts/AuthContext';
+import styles from '../styles/home.module.css';
 
 interface HomeProps {
   tweets: NewTweet[];
@@ -31,9 +32,9 @@ function News({ tweets, logged, users }: HomeProps) {
   const [isEnd, setIsEnd] = useState(false);
   const [loadMore, setLoadMore] = useState(false);
   const [useData, setUseData] = useState<NewTweet[]>(tweets);
-  const { theme, setTheme } = useTheme();
-  const { isAuth, setIsAuth } = useAuth();
-  const { isLoading, setIsLoading } = useLoading();
+  const { theme } = useTheme();
+  const { setIsAuth } = useAuth();
+  const { setIsLoading } = useLoading();
   const isDark = theme === 'dark';
 
   useEffect(() => {
@@ -44,9 +45,11 @@ function News({ tweets, logged, users }: HomeProps) {
     setLoadMore(true);
 
     try {
-      const res = await axios(
-        `https://peaceful-reef-54258.herokuapp.com/api/v1/trending?sort_by=${sortBy}&per_page=25&page=${page}`,
-        { withCredentials: true }
+      const res = await likedTweets.get(
+        `news?sort_by=${sortBy}&per_page=25&page=${page}}`,
+        {
+          withCredentials: true,
+        }
       );
 
       const tweets: NewTweet[] = res.data['tweets'];
@@ -65,9 +68,11 @@ function News({ tweets, logged, users }: HomeProps) {
     setSortBy(sort);
     setIsLoading(true);
 
-    const res = await axios(
-      `https://peaceful-reef-54258.herokuapp.com/api/v1/news?per_page=25&page=0&sort_by=${sort}`,
-      { withCredentials: true }
+    const res = await likedTweets.get(
+      `news?per_page=25&page=0&sort_by=${sort}`,
+      {
+        withCredentials: true,
+      }
     );
 
     const { tweets, logged } = res.data;
@@ -83,31 +88,7 @@ function News({ tweets, logged, users }: HomeProps) {
         <title>{siteTitle}</title>
       </Head>
 
-      <div className={isDark ? styles.navBar : styles.navBarLight}>
-        <Link href='/sports'>
-          <a
-            onClick={() => setIsLoading(true)}
-            className={isDark ? styles.button : styles.buttonLight}
-          >
-            Sports
-          </a>
-        </Link>
-
-        <Link href='/'>
-          <a
-            onClick={() => setIsLoading(true)}
-            className={isDark ? styles.button : styles.buttonLight}
-          >
-            Trending
-          </a>
-        </Link>
-
-        <Link href='/news'>
-          <a className={isDark ? styles.selected : styles.selectedLight}>
-            News
-          </a>
-        </Link>
-      </div>
+      <Tabbar name={'News'} />
 
       <main>
         <section className={styles.home}>
@@ -214,25 +195,19 @@ export default memo(News);
 export const getServerSideProps: GetServerSideProps<HomeProps> = async (
   ctx
 ) => {
-  const res = await axios(
-    `https://peaceful-reef-54258.herokuapp.com/api/v1/news?per_page=25&page=0`,
-    {
-      withCredentials: true,
-      headers: { cookie: ctx.req?.headers?.cookie ?? null },
-    }
-  );
+  const res = await likedTweets.get('news?per_page=25&page=0', {
+    withCredentials: true,
+    headers: { cookie: ctx.req?.headers?.cookie ?? null },
+  });
 
   const { tweets, logged } = await res.data;
 
-  const r = await axios(
-    'https://peaceful-reef-54258.herokuapp.com/api/v1/news/top-users',
-    {
-      withCredentials: true,
-      headers: { cookie: ctx.req?.headers?.cookie ?? null },
-    }
-  );
+  const res2 = await likedTweets.get('news/top-users', {
+    withCredentials: true,
+    headers: { cookie: ctx.req?.headers?.cookie ?? null },
+  });
 
-  const users: TweetUser[] = await r.data;
+  const users: TweetUser[] = await res2.data;
 
   return {
     props: {

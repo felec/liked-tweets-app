@@ -8,7 +8,7 @@ interface SidebarProps {
 }
 
 export default function SideBar(props: SidebarProps) {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const isDark = theme === 'dark';
 
   return (

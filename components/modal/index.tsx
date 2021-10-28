@@ -22,6 +22,7 @@ const Modal = ({
 
   return ReactDOM.createPortal(
     <div onClick={() => cb()} className={styles.backdrop}>
+      {/* Scale down and maintain aspect ratio of image */}
       <img
         height={size[0] / 1.5}
         width={size[1] / 1.5}

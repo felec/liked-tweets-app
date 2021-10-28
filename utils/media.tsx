@@ -3,8 +3,8 @@ import ReactPlayer from 'react-player';
 
 import { cdn } from '../utils/cdn';
 import { NewMedia } from '../types/type';
-import styles from '../styles/media.module.css';
 import Modal from '../components/modal';
+import styles from '../styles/media.module.css';
 
 export default function Media(media: NewMedia[], isTwitter: boolean) {
   const [isModal, setIsModal] = useState(false);
@@ -12,9 +12,7 @@ export default function Media(media: NewMedia[], isTwitter: boolean) {
   const [size, setSize] = useState<number[] | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const closeModal = () => {
-    setIsModal(false);
-  };
+  const closeModal = () => setIsModal(false);
 
   const openModal = (url: string, size: number[]) => {
     setUrl(url);
@@ -22,38 +20,36 @@ export default function Media(media: NewMedia[], isTwitter: boolean) {
     setIsModal(true);
   };
 
-  const handleVideoPressed = () => {
-    setIsPlaying(!isPlaying);
-  };
+  const handleVideoPressed = () => setIsPlaying(!isPlaying);
 
   const renderMediaType = () => {
     if (media.length === 1) {
-      return media.map((m) => {
-        switch (m.type) {
-          case 'video':
-            return (
-              <div key={m.id_str} onClick={handleVideoPressed}>
-                <ReactPlayer
-                  url={isTwitter ? m.url : cdn(m.url)}
-                  playing={isPlaying}
-                />
-              </div>
-            );
-          case 'photo':
-            return (
-              <img
-                key={m.id_str}
-                onClick={() => openModal(m.url, m.size)}
-                className={styles.photo}
-                src={isTwitter ? m.url : cdn(m.url)}
-                alt='tweet pic'
-              />
-            );
+      const m = media[0];
 
-          default:
-            break;
-        }
-      });
+      switch (m.type) {
+        case 'video':
+          return (
+            <div key={m.id_str} onClick={handleVideoPressed}>
+              <ReactPlayer
+                url={isTwitter ? m.url : cdn(m.url)}
+                playing={isPlaying}
+              />
+            </div>
+          );
+        case 'photo':
+          return (
+            <img
+              key={m.id_str}
+              onClick={() => openModal(m.url, m.size)}
+              className={styles.photo}
+              src={isTwitter ? m.url : cdn(m.url)}
+              alt='tweet pic'
+            />
+          );
+
+        default:
+          break;
+      }
     } else if (media.length === 2) {
       return (
         <div className={styles.twoPhoto}>

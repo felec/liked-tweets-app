@@ -15,13 +15,15 @@ export default function Card({
   isTwitter: boolean;
 }) {
   const numAbbr = new NumAbbr(['K', 'M', 'B', 'T']);
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const isDark = theme === 'dark';
 
   const created = Date.parse(tweet.created_at);
   const date = new Date(created);
   let f_text = tweet.full_text;
 
+  // Twitter API sometimes inserts links to the tweet inside the
+  // text content, this removes all links from text content
   if (f_text.includes('http')) {
     const ftList = f_text.split(' ');
     f_text = ftList
@@ -45,11 +47,13 @@ export default function Card({
     return desc;
   };
 
+  // Removing the seconds from the timeString, join full time
   const dateTime = date.toLocaleTimeString();
   const timeList = dateTime.split(' ');
   const time = timeList[0].split(':');
   const finalTime = `${time[0]}:${time[1]} ${timeList[1]}`;
 
+  // Trim year to 2 numbers, join full date
   const local = date.toLocaleDateString();
   const localList = local.split('/');
   const year = localList[2].slice(2, localList[2].length);

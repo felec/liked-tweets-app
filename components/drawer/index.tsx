@@ -2,11 +2,11 @@ import { useState } from 'react';
 import NumAbbr from 'number-abbreviate';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import styles from './drawer.module.css';
-import axios from 'axios';
+import { likedTweets } from '../../api';
 import { useUser } from '../../contexts/UserContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
+import styles from './drawer.module.css';
 
 export default function Drawer() {
   const numAbbr = new NumAbbr(['K', 'M', 'B', 'T']);
@@ -19,10 +19,7 @@ export default function Drawer() {
 
   const logoutUser = async () => {
     try {
-      await axios(
-        'https://peaceful-reef-54258.herokuapp.com/api/v1/auth/logout',
-        { withCredentials: true }
-      );
+      await likedTweets.get('auth/logout', { withCredentials: true });
 
       setUser(null);
       setIsAuth(false);

@@ -2,13 +2,13 @@ import { memo } from 'react';
 import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import Head from 'next/head';
-import axios from 'axios';
 
-import Layout, { siteTitle } from '../components/layout';
+import { likedTweets } from '../api';
 import { NewTweet } from '../types/type';
-import styles from '../styles/home.module.css';
 import Card from '../components/card';
+import Layout, { siteTitle } from '../components/layout';
 import { useTheme } from '../contexts/ThemeContext';
+import styles from '../styles/home.module.css';
 
 interface HomeProps {
   data: NewTweet[];
@@ -74,7 +74,7 @@ export default memo(Search);
 export const getServerSideProps: GetServerSideProps<HomeProps> = async (
   ctx
 ) => {
-  const res = await axios(
+  const res = await likedTweets.get(
     encodeURI(
       `https://peaceful-reef-54258.herokuapp.com/api/v1/trending/search?q=${ctx.query.q}`
     ),
@@ -83,6 +83,7 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async (
       headers: { cookie: ctx.req?.headers?.cookie ?? null },
     }
   );
+
   const data: NewTweet[] = await res.data;
 
   return {

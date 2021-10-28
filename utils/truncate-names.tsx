@@ -1,9 +1,12 @@
 import { NewTweet } from '../types/type';
 import styles from '../components/quote/quote.module.css';
 
+// An arbitrary way of shortening screen names so do not overflow
+// Based on certain letter sizes, rank the physical length of
+// the name, and truncate based on the calculated size and add to total
 export const truncateNames = (tweet: NewTweet, isDark: boolean) => {
   const alpha = { W: 1, Q: 1, U: 1, M: 1, G: 1, H: 1 };
-  let qName = tweet.q_name;
+  let uName = tweet.q_name;
   let sName = tweet.q_screen_name;
   let total = sName.length;
 
@@ -13,14 +16,17 @@ export const truncateNames = (tweet: NewTweet, isDark: boolean) => {
     }
   });
 
-  if (qName.length > 14) {
-    if (qName.length > 17) {
-      for (let i = 12; i < qName.length; i++) {
-        qName = qName.slice(0, -1);
+  // If the username is too long,
+  // omit the screen name
+  if (uName.length > 14) {
+    if (uName.length > 17) {
+      for (let i = 12; i < uName.length; i++) {
+        uName = uName.slice(0, -1);
       }
+
       return (
         <h2 className={isDark ? styles.quoteName : styles.quoteNameLight}>
-          {qName}...{' '}
+          {uName}...{' '}
           {tweet.q_verified && (
             <img
               className={styles.verified}
@@ -30,41 +36,30 @@ export const truncateNames = (tweet: NewTweet, isDark: boolean) => {
         </h2>
       );
     }
+
     return (
       <h2 className={isDark ? styles.quoteName : styles.quoteNameLight}>
-        {qName}...{' '}
+        {uName}...{' '}
         {tweet.q_verified && (
           <img className={styles.verified} src='../images/verified-light.png' />
         )}
       </h2>
     );
-  } else if (qName.length + total > 24) {
-    if (total > sName.length) {
-      for (let i = 5; i < total; i++) {
-        sName = sName.slice(0, -1);
-      }
-      return (
-        <>
-          <h2 className={isDark ? styles.quoteName : styles.quoteNameLight}>
-            {qName}{' '}
-            {tweet.q_verified && (
-              <img
-                className={styles.verified}
-                src='../images/verified-light.png'
-              />
-            )}
-          </h2>{' '}
-          <h3 className={styles.quoteScreenName}>@{sName}...</h3>
-        </>
-      );
-    }
+  } else if (uName.length + total > 24) {
+    // Handle worst case scenario,
+    // ex: someone with username WWWWWWWWWWWWWW (14 W's)
+    // will overflow, so name + total will be 28
+
+    // Allow username to display,
+    // shorten screen name
     for (let i = 5; i < total; i++) {
       sName = sName.slice(0, -1);
     }
+
     return (
       <>
         <h2 className={isDark ? styles.quoteName : styles.quoteNameLight}>
-          {qName}{' '}
+          {uName}{' '}
           {tweet.q_verified && (
             <img
               className={styles.verified}
@@ -79,7 +74,7 @@ export const truncateNames = (tweet: NewTweet, isDark: boolean) => {
     return (
       <>
         <h2 className={isDark ? styles.quoteName : styles.quoteNameLight}>
-          {qName}{' '}
+          {uName}{' '}
           {tweet.q_verified && (
             <img
               className={styles.verified}

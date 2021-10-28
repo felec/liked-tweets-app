@@ -2,7 +2,9 @@
 // import express from 'express';
 import next from 'next';
 
-// Not In Use
+/**
+ * Experimental, NOT IN USE
+ */
 
 // https://stackoverflow.com/questions/66484589/using-vercel-for-frontend-and-heroku-for-api
 

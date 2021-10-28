@@ -71,7 +71,7 @@ export default function Layout({ children }) {
             <input
               className={isDark ? styles.headerInput : styles.headerInputLight}
               type='text'
-              placeholder='Search for a tweet or user...'
+              placeholder='Search our database for a tweet or user...'
               maxLength={40}
               value={searchQuery}
               onChange={handleSearchQueryInput}
@@ -94,7 +94,10 @@ export default function Layout({ children }) {
       <footer className={styles.footer}>
         <p>View source on Github</p>
 
-        <Link href='https://github.com/felec/liked-tweets-app' passHref={true}>
+        <a
+          style={{ color: '#000' }}
+          href='https://github.com/felec/liked-tweets-app'
+        >
           <FaGithub
             style={{
               marginLeft: '8px',
@@ -102,7 +105,7 @@ export default function Layout({ children }) {
             }}
             size={20}
           />
-        </Link>
+        </a>
       </footer>
     </div>
   );

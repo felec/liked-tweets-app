@@ -27,6 +27,8 @@ export default function Quote({ tweet, isTwitter }: ContentProps) {
   const year = localList[2].slice(0, 2);
   const localDate = `${localList[0]}/${localList[1]}/${year}`;
 
+  // Twitter API sometimes inserts links to the tweet inside the
+  // text content, this removes all links from text content
   if (q_text.includes('http')) {
     const qtList = q_text.split(' ');
     q_text = qtList
@@ -43,6 +45,8 @@ export default function Quote({ tweet, isTwitter }: ContentProps) {
     return desc;
   };
 
+  // Manage theme classnames for whether tweet has
+  // media or no media
   const quoteClassName = () => {
     if (tweet.media.length) {
       return tweet.media[0]?.type === 'photo'
