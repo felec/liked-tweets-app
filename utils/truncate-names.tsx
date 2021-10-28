@@ -50,8 +50,8 @@ export const truncateNames = (tweet: NewTweet, isDark: boolean) => {
     // ex: someone with username WWWWWWWWWWWWWW (14 W's)
     // will overflow, so name + total will be 28
 
-    // Allow username to display,
-    // shorten screen name
+    // Allow username to display
+    // and shorten screen name
     for (let i = 5; i < total; i++) {
       sName = sName.slice(0, -1);
     }
