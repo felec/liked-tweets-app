@@ -55,6 +55,7 @@ export default function Layout({ children }) {
         />
         <meta name='og:title' content={siteTitle} />
       </Head>
+
       {isLoading && <div className={styles.loading}></div>}
       <div className={styles.headerDiv}>
         <div className={styles.leftHeader}>

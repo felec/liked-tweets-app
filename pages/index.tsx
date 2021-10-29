@@ -12,13 +12,13 @@ import {
 import { likedTweets } from '../api';
 import { NewTweet, TweetUser } from '../types/type';
 import Card from '../components/card';
+import Tabbar from '../components/tabbar';
 import SideBar from '../components/sidebar';
 import Layout, { siteTitle } from '../components/layout';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
 import { useLoading } from '../contexts/LoadContext';
 import styles from '../styles/home.module.css';
-import Tabbar from '../components/tabbar';
 
 interface HomeProps {
   tweets: NewTweet[];
@@ -31,7 +31,7 @@ function Home({ tweets, logged, users }: HomeProps) {
   const [page, setPage] = useState(1);
   const [isEnd, setIsEnd] = useState(false);
   const [loadMore, setLoadMore] = useState(false);
-  const [useData, setUseData] = useState<NewTweet[]>(tweets);
+  const [data, setData] = useState<NewTweet[]>(tweets);
   const { theme } = useTheme();
   const { setIsAuth } = useAuth();
   const { setIsLoading } = useLoading();
@@ -54,7 +54,7 @@ function Home({ tweets, logged, users }: HomeProps) {
 
       const tweets: NewTweet[] = res.data['tweets'];
 
-      setUseData([...useData, ...tweets]);
+      setData([...data, ...tweets]);
       setPage(page + 1);
       setIsEnd(!tweets.length);
     } catch (err) {
@@ -77,7 +77,7 @@ function Home({ tweets, logged, users }: HomeProps) {
 
     const { tweets, logged } = res.data;
 
-    setUseData(tweets);
+    setData(tweets);
     setIsAuth(logged);
     setIsLoading(false);
   };
@@ -161,7 +161,7 @@ function Home({ tweets, logged, users }: HomeProps) {
               alignItems: 'center',
             }}
           >
-            {useData.map((t) => {
+            {data.map((t) => {
               return (
                 <li key={t.id_str} style={{ marginBottom: '5rem' }}>
                   <Card tweet={t} isTwitter={false} />
