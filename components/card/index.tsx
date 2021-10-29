@@ -15,7 +15,7 @@ export default function Card({
   isTwitter: boolean;
 }) {
   const numAbbr = new NumAbbr(['K', 'M', 'B', 'T']);
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const isDark = theme === 'dark';
 
   const created = Date.parse(tweet.created_at);

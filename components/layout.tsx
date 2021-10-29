@@ -92,9 +92,11 @@ export default function Layout({ children }) {
       <div>{children}</div>
 
       <footer className={styles.footer}>
-        <p>View source on Github</p>
-
-        <Link href='https://github.com/felec/liked-tweets-app' passHref={true}>
+        <a
+          style={{ display: 'flex', alignItems: 'center', color: '#000' }}
+          href='https://github.com/felec/liked-tweets-app'
+        >
+          <p>View source on Github</p>
           <FaGithub
             style={{
               marginLeft: '8px',
@@ -102,7 +104,7 @@ export default function Layout({ children }) {
             }}
             size={20}
           />
-        </Link>
+        </a>
       </footer>
     </div>
   );

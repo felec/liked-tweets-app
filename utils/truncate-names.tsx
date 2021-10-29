@@ -18,6 +18,7 @@ export const truncateNames = (tweet: NewTweet, isDark: boolean) => {
       for (let i = 12; i < qName.length; i++) {
         qName = qName.slice(0, -1);
       }
+
       return (
         <h2 className={isDark ? styles.quoteName : styles.quoteNameLight}>
           {qName}...{' '}
@@ -39,28 +40,10 @@ export const truncateNames = (tweet: NewTweet, isDark: boolean) => {
       </h2>
     );
   } else if (qName.length + total > 24) {
-    if (total > sName.length) {
-      for (let i = 5; i < total; i++) {
-        sName = sName.slice(0, -1);
-      }
-      return (
-        <>
-          <h2 className={isDark ? styles.quoteName : styles.quoteNameLight}>
-            {qName}{' '}
-            {tweet.q_verified && (
-              <img
-                className={styles.verified}
-                src='../images/verified-light.png'
-              />
-            )}
-          </h2>{' '}
-          <h3 className={styles.quoteScreenName}>@{sName}...</h3>
-        </>
-      );
-    }
     for (let i = 5; i < total; i++) {
       sName = sName.slice(0, -1);
     }
+
     return (
       <>
         <h2 className={isDark ? styles.quoteName : styles.quoteNameLight}>
