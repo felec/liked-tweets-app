@@ -71,7 +71,7 @@ export default function Layout({ children }) {
             <input
               className={isDark ? styles.headerInput : styles.headerInputLight}
               type='text'
-              placeholder='Search for a tweet or user...'
+              placeholder='Search our databse for a tweet or user...'
               maxLength={40}
               value={searchQuery}
               onChange={handleSearchQueryInput}

@@ -45,7 +45,7 @@ function Sports({ tweets, logged, users }: HomeProps) {
 
     try {
       const res = await api.get(
-        `trending?sort_by=${sortBy}&per_page=25&page=${page}`,
+        `sports?sort_by=${sortBy}&per_page=25&page=${page}`,
         {
           withCredentials: true,
         }
