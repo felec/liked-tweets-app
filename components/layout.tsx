@@ -31,8 +31,9 @@ export default function Layout({ children }) {
   };
 
   const changeTheme = () => {
+    console.log(theme);
     const currentTheme = isDark ? 'light' : 'dark';
-    window.localStorage.setItem('theme', currentTheme);
+    window?.localStorage.setItem('theme', currentTheme);
     setTheme(currentTheme);
   };
 
@@ -91,12 +92,11 @@ export default function Layout({ children }) {
       <div>{children}</div>
 
       <footer className={styles.footer}>
-        <p>View source on Github</p>
-
         <a
-          style={{ color: '#000' }}
+          style={{ display: 'flex', alignItems: 'center', color: '#000' }}
           href='https://github.com/felec/liked-tweets-app'
         >
+          <p>View source on Github</p>
           <FaGithub
             style={{
               marginLeft: '8px',

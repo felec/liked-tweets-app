@@ -11,7 +11,7 @@ export default function Favs() {
   const [lastId, setLastId] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const isDark = theme === 'dark';
 
   const fetchFavs = async () => {

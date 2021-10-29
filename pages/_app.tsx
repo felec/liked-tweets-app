@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }) {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const cookieTheme = window.localStorage.getItem('theme');
+    const cookieTheme = window?.localStorage.getItem('theme');
     setTheme(cookieTheme ?? 'dark');
   }, []);
 

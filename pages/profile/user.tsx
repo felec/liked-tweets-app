@@ -8,14 +8,14 @@ import Favs from './favs';
 import styles from '../../styles/home.module.css';
 import { useUser } from '../../contexts/UserContext';
 import { useAuth } from '../../contexts/AuthContext';
-import Layout, { siteTitle } from '../../components/layout';
 import { useTheme } from '../../contexts/ThemeContext';
+import Layout, { siteTitle } from '../../components/layout';
 
 function User() {
   const [isVerified, setIsVerified] = useState(false);
   const { query, isReady } = useRouter();
   const { isAuth, setIsAuth } = useAuth();
-  const { user, setUser } = useUser();
+  const { setUser } = useUser();
   const token = query['oauth_token'];
   const verifier = query['oauth_verifier'];
   const { theme, setTheme } = useTheme();
