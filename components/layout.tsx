@@ -31,7 +31,6 @@ export default function Layout({ children }) {
   };
 
   const changeTheme = () => {
-    console.log(theme);
     const currentTheme = isDark ? 'light' : 'dark';
     window?.localStorage.setItem('theme', currentTheme);
     setTheme(currentTheme);
@@ -42,6 +41,7 @@ export default function Layout({ children }) {
   return (
     <div
       style={{
+        height: '100%',
         backgroundColor: themeColor,
       }}
     >
@@ -89,7 +89,7 @@ export default function Layout({ children }) {
         </div>
       </div>
 
-      <div>{children}</div>
+      <main>{children}</main>
 
       <footer className={styles.footer}>
         <a
