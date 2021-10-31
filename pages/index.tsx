@@ -4,10 +4,10 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import {
-  AiOutlineClockCircle,
+  AiOutlineRise,
   AiOutlineHeart,
   AiOutlineRetweet,
-  AiOutlineRise,
+  AiOutlineClockCircle,
 } from 'react-icons/ai';
 
 import { api } from '../api';
